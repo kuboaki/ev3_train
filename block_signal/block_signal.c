@@ -5,10 +5,18 @@
 #include "block_signal.h"
 
 typedef enum _block_signal_state {
-  BS_INIT,
-  BS_STOP,
-  BS_DEPARTURE
+    BS_INIT,
+    BS_STOP_1,      // 停止表示へ変更中
+    BS_STOP_2,      // 停止を現時中
+    BS_DEPARTURE_1, // 進行表示へ変更中
+    BS_DEPARTURE_2  // 進行を現時中
+    TNUM_BLOCK_SIGNAL_STATE
 } block_signal_state;
+
+char state_msg[TNUM_BLOCK_SIGNAL_STATE] = {
+    "BS_INIT", "BS_STOP_1", "BS_STOP_2",
+    "BS_DEPARTURE_1", "BS_DEPARTURE_2"
+};
 
 static block_signal_state bs_state = BS_INIT ;
 static bool bs_is_entry = true;
@@ -20,7 +28,7 @@ static bool bs_is_entry = true;
 #define END }
 
 void block_signal_init(void) {
-  // signal_display_init();
+  // signal_display_init(); // signal_displayのステートマシンで初期化する
   manual_switch_init();
   train_detector_init();
   bs_state = BS_INIT;
@@ -29,40 +37,50 @@ void block_signal_init(void) {
 
 void block_signal_run(void) {
   num_f( bs_state, 1 );
+  msg_f((state_msg[bs_state], 2);
   switch( bs_state ) {
   case BS_INIT:
     ENTRY
-      msg_f("state: INIT", 2);
       block_signal_init();
-      horn_confirmation(); // 手動設定を促すため
     DO
-      // 最初は、手動で停止にセットして、手動スイッチを押す
-      EVTCHK(manual_switch_is_pushed(),BS_DEPARTURE); 
+    EVTCHK(true,BS_STOP_1);
     EXIT
     END
     break;
-  case BS_DEPARTURE:
+  case BS_STOP_1:
+    ENTRY
+      signal_display_set_stop();
+    DO
+    EVTCHK((signal_display_get_current()==SIGNAL_STOP),BS_STOP_2):
+    EXIT
+    END
+    break;
+  case BS_STOP_2:
+    ENTRY
+    DO
+    // マニュアル操作を受け取った場合
+    EVTCHK(manual_switch_is_pushed(),BS_DEPARTURE_1);
+    // 司令室から進行指示を受け取った場合
+    // EVTCHK(司令室からの指示を受け取った(),BS_DEPARTURE_1);
+    EXIT
+    END
+    break;
+  case BS_DEPARTURE_1:
     ENTRY
       signal_display_set_departure();
-      msg_f("state: DEPARTURE", 2);
     DO
-    // マニュアル操作を受け取った場合
-    EVTCHK(manual_switch_is_pushed(),BS_STOP);
-    // 列車が通過した場合
-    EVTCHK(train_detector_is_detected(),BS_STOP);
-    EXIT
+    EVTCHK((signal_display_get_current()==SIGNAL_DEPARTURE),BS_DEPARTURE_2):
     END
     break;
-  case BS_STOP:
+  case BS_DEPARTURE_2:
     ENTRY
-      // horn_warning();
-      signal_display_set_stop();
-      msg_f("state: STOP", 2);
     DO
     // マニュアル操作を受け取った場合
-    EVTCHK(manual_switch_is_pushed(),BS_DEPARTURE); 
+    EVTCHK(manual_switch_is_pushed(),BS_STOP_1);
+    // 列車が通過した場合
+    EVTCHK(train_detector_is_detected(),BS_STOP_1);
     // 司令室から進行指示を受け取った場合
-    // EVTCHK(司令室からの指示を受け取った(),BS_DEPARTURE); 
+    // EVTCHK(司令室からの指示を受け取った(),BS_STOP_1);
     EXIT
     END
     break;

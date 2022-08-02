@@ -22,15 +22,15 @@ int train_detector_detect_count = 0;
 
 // このdetectorを使うには cyc0 の周期は100ms以上にする
 bool train_detector_is_detected(void) {
-  static int8_t val_old = 0;
-  int8_t val = ev3_ultrasonic_sensor_get_distance(
-    train_detector_sensor_port);
+    static int8_t val_old = 0;
+    int8_t val = ev3_ultrasonic_sensor_get_distance(
+        train_detector_sensor_port);
 
-  if( val_old != val ) {
-    fmt_f("dist=%d", val, 4);
-  }
-  val_old = val;
-  return val < train_detector_threshold;
+    if( val_old != val ) {
+        fmt_f("dist=%d", val, 4);
+    }
+    val_old = val;
+    return val < train_detector_threshold;
 
 /***
   static uint16_t detected = 0;
@@ -52,4 +52,3 @@ bool train_detector_is_detected(void) {
   return detected;
 ***/
 }
-

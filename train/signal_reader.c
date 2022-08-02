@@ -12,20 +12,19 @@ void signal_reader_init(void) {
 }
 
 signal_type_t signal_reader_get_signal(void) {
-  colorid_t color = COLOR_NONE;
-  signal_type_t signal = SIGNAL_NONE;
-  color = ev3_color_sensor_get_color(signal_reader_sensor_port);
-  switch(color) {
-  case COLOR_RED:
-    signal = SIGNAL_STOP;
-    break;
-  case COLOR_GREEN:
-    signal = SIGNAL_DEPARTURE;
-    break;
-  default:
-    color = COLOR_NONE;
-    signal = SIGNAL_NONE;
-  }
-  return signal;
+    colorid_t color = COLOR_NONE;
+    signal_type_t signal = SIGNAL_NONE;
+    color = ev3_color_sensor_get_color(signal_reader_sensor_port);
+    switch(color) {
+    case COLOR_RED:
+        signal = SIGNAL_STOP;
+        break;
+    case COLOR_GREEN:
+        signal = SIGNAL_DEPARTURE;
+        break;
+    default:
+        color = COLOR_NONE;
+        signal = SIGNAL_NONE;
+    }
+    return signal;
 }
-
