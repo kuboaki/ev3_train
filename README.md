@@ -1,4 +1,4 @@
-[English](README.md) | [日本語](README_jp.md)
+[English](README.md) | [日本語](README_ja.md)
 
 # Building LEGO Train with Mindstorms EV3
 
@@ -45,7 +45,9 @@ Signal display unit uses L-Motor, touch sensors, color sensor.
 * touch sensor: detecting signal display motor rotation.
 * color sensor: detecting current signal for present.
 
-![ev3_train_block_signal](images/block_signal_03_w_cables.png)
+Note: Stickers are attached on the bricks for reading the displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
+
+![ev3_train_block_signal](images/block_signal_04_w_cables.png)
 
 ### Manual switch
 

@@ -1,4 +1,4 @@
-[English](README.md) | [日本語](README_jp.md)
+[English](README.md) | [日本語](README_ja.md)
 
 # EV3を使ったLEGO Trainの制作
 
@@ -63,7 +63,10 @@
 * touch sensor: 信号表示モーターの回転の監視用
 * color sensor: 現在表示中の信号の読み取り器
 
-![ev3_train_block_signal](images/block_signal_03_w_cables.png)
+注意：表示中の信号を読み取るためのブロックには、ステッカーを貼っています。色はLEGOブロックの青と黄色に似せています。
+
+![ev3_train_block_signal](images/block_signal_04_w_cables.png)
+
 
 ### 手動スイッチ
 
