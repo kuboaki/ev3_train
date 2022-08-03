@@ -1,10 +1,10 @@
 [English](README.md) | [日本語](README_ja.md)
 
-# EV3を使ったLEGO Trainの制作
+# EV3を使ったLEGO Trainの製作
 
 このリポジトリは、LEGO City Trainのレールを走る列車（あるいは機関車）と、その列車の運行を制御するための信号機などについて、ブロックの組立図や動かすプログラムを提供します。
 
-## 制作の動機
+## 製作の動機
 
 電車の制御では、電灯を使った信号機が普及するまで、出発または停止を示す標識板を動かして信号に使っていました。
 
@@ -31,7 +31,7 @@
 
 ## 列車（実は機関車だけですが…）
 
-列車は、LEGO Mindstorms EV3とLEGO City Train のパーツを使って制作しました。
+列車は、LEGO Mindstorms EV3とLEGO City Train のパーツを使って製作しました。
 
 * M-Motor(Medium Motor): 走行ユニット
 * color sensor: 信号読取り器
@@ -46,7 +46,7 @@
 
 ## 信号機
 
-信号機は、LEGO Mindstorms EV3とその他のLEGO のパーツを組み合わせて制作しました。
+信号機は、LEGO Mindstorms EV3とその他のLEGO のパーツを組み合わせて製作しました。
 
 信号機は、閉塞信号機というものです。
 
