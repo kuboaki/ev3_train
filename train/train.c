@@ -25,10 +25,9 @@ static bool tr_is_entry = true;
 void train_init(void) {
     drive_unit_init();
     signal_reader_init();
-    emergency_stopper_init();
+    operation_switch_init();
     tr_state = TR_INIT;
     tr_is_entry = true;
-    ev3_led_set_color(LED_ORANGE);
 }
 
 bool train_signal_is_stop(void) {
@@ -48,50 +47,48 @@ void train_run(void) {
         DO
         EVTCHK(true,TR_WAIT_FOR_DEPARTURE);
         EXIT
-            END
-            break;
+        END
+        break;
     case TR_WAIT_FOR_DEPARTURE:
         ENTRY
+            ev3_led_set_color(LED_ORANGE);
             horn_warning();
-        timer_start( 3000 * 1000U );
         DO
-        EVTCHK(timer_is_timedout(),TR_FORWARDING);
+        EVTCHK(operation_switch_is_pushed(),TR_FORWARDING);
         EXIT
-            timer_stop();
         END
-            break;
+        break;
     case TR_FORWARDING:
         ENTRY
             ev3_led_set_color(LED_GREEN);
             horn_confirmation();
-        DO
             drive_unit_forward();
+        DO
         EVTCHK(train_signal_is_stop(),TR_STOP);
-        EVTCHK(emergency_stopper_is_pushed(),TR_EXIT);
+        EVTCHK(operation_switch_is_pushed(),TR_EXIT);
         EXIT
-            drive_unit_stop();
         END
-            break;
+        break;
     case TR_STOP:
         ENTRY
             ev3_led_set_color(LED_RED);
             horn_arrived();
+            drive_unit_stop();
         DO
         EVTCHK(train_signal_is_departure(),TR_FORWARDING);
-        EVTCHK(emergency_stopper_is_pushed(),TR_EXIT);
+        EVTCHK(operation_switch_is_pushed(),TR_EXIT);
         EXIT
-            timer_stop();
-    END
-    break;
+        END
+        break;
   case TR_EXIT:
-    ENTRY
-      drive_unit_stop();
-      ev3_led_set_color(LED_ORANGE);
-      msg_f("exit.", 1);
-      horn_warning();
-    DO
-    EXIT
-    END
-    break;
-  }
+      ENTRY
+          drive_unit_stop();
+          ev3_led_set_color(LED_ORANGE);
+          msg_f("exit.", 1);
+          horn_warning();
+      DO
+      EXIT
+      END
+      break;
+    }
 }

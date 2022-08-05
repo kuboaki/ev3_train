@@ -6,6 +6,7 @@
 
 #include "ev3api.h"
 #include "stdbool.h"
+#include "rotator.h""
 #include "util.h"
 
 // 信号の種類

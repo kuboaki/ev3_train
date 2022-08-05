@@ -27,17 +27,25 @@ static bool bs_is_entry = true;
 #define EXIT }if(bs_is_entry){
 #define END }
 
+bool signal_display_is_stop(void) {
+    return signal_display_get_current() == SIGNAL_STOP;
+}
+
+bool signal_display_is_departure(void) {
+    return signal_display_get_current() == SIGNAL_DEPARTURE;
+}
+
 void block_signal_init(void) {
   // signal_display_init(); // signal_displayのステートマシンで初期化する
   manual_switch_init();
   train_detector_init();
+  horn_confirmation();
   bs_state = BS_INIT;
   bs_is_entry = true;
 }
 
 void block_signal_run(void) {
-  num_f( bs_state, 1 );
-  msg_f((state_msg[bs_state], 2);
+  msg_f((state_msg[bs_state], 1);
   switch( bs_state ) {
   case BS_INIT:
     ENTRY
@@ -51,7 +59,7 @@ void block_signal_run(void) {
     ENTRY
       signal_display_set_stop();
     DO
-    EVTCHK((signal_display_get_current()==SIGNAL_STOP),BS_STOP_2):
+    EVTCHK(signal_display_is_stop(),BS_STOP_2):
     EXIT
     END
     break;
@@ -69,7 +77,7 @@ void block_signal_run(void) {
     ENTRY
       signal_display_set_departure();
     DO
-    EVTCHK((signal_display_get_current()==SIGNAL_DEPARTURE),BS_DEPARTURE_2):
+    EVTCHK(signal_display_is_departure(),BS_DEPARTURE_2):
     END
     break;
   case BS_DEPARTURE_2:

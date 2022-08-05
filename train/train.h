@@ -8,11 +8,10 @@
 #include "stdbool.h"
 
 #include "util.h"
-#include "timer.h"
 #include "horn.h"
 #include "drive_unit.h"
 #include "signal_reader.h"
-#include "emergency_stopper.h"
+#include "operation_switch.h"
 
 extern void train_init(void);
 extern void train_run(void);
