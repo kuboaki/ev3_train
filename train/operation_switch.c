@@ -15,10 +15,13 @@ void operation_switch_init(void) {
 }
 
 bool operation_switch_is_pushed(void) {
+    return ev3_touch_sensor_is_pressed(operation_switch_sensor_port);
+/*
     bool current = ev3_touch_sensor_is_pressed(operation_switch_sensor_port);
     if( current == false && saved == true ) {
         return true;
     } else {
         return false;
     }
+*/
 }

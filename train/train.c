@@ -7,12 +7,20 @@
 typedef enum {
     TR_INIT,
     TR_EXIT,
-    TR_WAIT_FOR_DEPARTURE,
+    TR_WAIT_FOR_DEPARTURE1, // 運転開始待ち
+    TR_WAIT_FOR_DEPARTURE2, // 運転開始待ち
     TR_FORWARDING,
     TR_STOP,
+    TNUM_TRAIN_STATE
 } train_state;
 
+static char* state_msg[TNUM_TRAIN_STATE] = {
+    "INIT", "EXIT", "W_F_DEP1","W_F_DEP2",
+    "FORWARDING", "STOP"
+};
+
 static train_state tr_state = TR_INIT;
+static train_state tr_state_old = TR_INIT;
 static bool tr_is_entry = true;
 
 
@@ -39,22 +47,32 @@ bool train_signal_is_departure(void) {
 }
 
 void train_run(void) {
-    num_f( tr_state, 2 );
+    if( tr_state == tr_state_old ) {
+        msg_f(state_msg[tr_state], 2);
+    }
+    tr_state_old = tr_state;
     switch( tr_state ) {
     case TR_INIT:
         ENTRY
             train_init();
         DO
-        EVTCHK(true,TR_WAIT_FOR_DEPARTURE);
+        EVTCHK(true,TR_WAIT_FOR_DEPARTURE1);
         EXIT
         END
         break;
-    case TR_WAIT_FOR_DEPARTURE:
+    case TR_WAIT_FOR_DEPARTURE1:
         ENTRY
             ev3_led_set_color(LED_ORANGE);
             horn_warning();
         DO
-        EVTCHK(operation_switch_is_pushed(),TR_FORWARDING);
+        EVTCHK(operation_switch_is_pushed(),TR_WAIT_FOR_DEPARTURE2)
+        EXIT
+        END
+        break;
+    case TR_WAIT_FOR_DEPARTURE2:
+        ENTRY
+        DO
+            EVTCHK((!operation_switch_is_pushed()),TR_FORWARDING)
         EXIT
         END
         break;
@@ -64,31 +82,33 @@ void train_run(void) {
             horn_confirmation();
             drive_unit_forward();
         DO
-        EVTCHK(train_signal_is_stop(),TR_STOP);
-        EVTCHK(operation_switch_is_pushed(),TR_EXIT);
+        EVTCHK(train_signal_is_stop(),TR_STOP)
+        EVTCHK(operation_switch_is_pushed(),TR_EXIT)
         EXIT
         END
         break;
     case TR_STOP:
         ENTRY
+            drive_unit_stop();
             ev3_led_set_color(LED_RED);
             horn_arrived();
-            drive_unit_stop();
         DO
-        EVTCHK(train_signal_is_departure(),TR_FORWARDING);
-        EVTCHK(operation_switch_is_pushed(),TR_EXIT);
+        EVTCHK(train_signal_is_departure(),TR_FORWARDING)
+        EVTCHK(operation_switch_is_pushed(),TR_EXIT)
         EXIT
         END
         break;
-  case TR_EXIT:
-      ENTRY
-          drive_unit_stop();
-          ev3_led_set_color(LED_ORANGE);
-          msg_f("exit.", 1);
-          horn_warning();
-      DO
-      EXIT
-      END
-      break;
+    case TR_EXIT:
+        ENTRY
+            drive_unit_stop();
+            ev3_led_set_color(LED_ORANGE);
+            horn_warning();
+        DO
+        EXIT
+        END
+        break;
+    default:
+    case TNUM_TRAIN_STATE:
+        break;
     }
 }

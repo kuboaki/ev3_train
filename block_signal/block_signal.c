@@ -13,7 +13,7 @@ typedef enum _block_signal_state {
     TNUM_BLOCK_SIGNAL_STATE
 } block_signal_state;
 
-char state_msg[TNUM_BLOCK_SIGNAL_STATE] = {
+static char state_msg[TNUM_BLOCK_SIGNAL_STATE] = {
     "BS_INIT", "BS_STOP_1", "BS_STOP_2",
     "BS_DEPARTURE_1", "BS_DEPARTURE_2"
 };
