@@ -6,18 +6,18 @@
 
 #include "ev3api.h"
 #include "stdbool.h"
-#include "rotator.h""
+#include "rotator.h"
 #include "util.h"
 
 // 信号の種類
 // 当座は進行と停止だけ
 typedef enum _signal_type_t {
-    SIGNAL_NONE = 0,     // 未定
-    SIGNAL_STOP = 1,     // 停止
-    SIGNAL_DEPARTURE = 2,// 進行
-    SIGNAL_REDUCE = 3,   // 減速
-    SIGNAL_CAUTION = 4,  // 注意
-    SIGNAL_ALERT = 5,    // 警戒
+    SIGNAL_NONE,       // 未定
+    SIGNAL_STOP,       // 停止
+    SIGNAL_DEPARTURE,  // 進行
+    SIGNAL_REDUCE,     // 減速
+    SIGNAL_CAUTION,    // 注意
+    SIGNAL_ALERT,      // 警戒
     TNUM_SIGNAL
 } signal_type_t;
 

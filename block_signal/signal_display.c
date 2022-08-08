@@ -9,10 +9,17 @@ typedef enum _signal_display_state {
     SD_WAIT_FOR_STOP,     // 停止へ切替中
     SD_STOP,              // 停止現示中
     SD_WAIT_FOR_DEP,      // 進行へ切替中
-    SD_DEPARTURE         // 進行現示中
+    SD_DEPARTURE,         // 進行現示中
+    TNUM_SIGNAL_DISPLAY_STATE
 } signal_display_state;
 
+static char* state_msg[TNUM_SIGNAL_DISPLAY_STATE] = {
+    "SD_INIT", "SD_W_F_STOP", "SD_STOP",
+    "SD_W_F_DEP", "SD_DEPARTURE"
+}
+
 static signal_display_state sd_state = SD_INIT ;
+static signal_display_state sd_state_old = SD_INIT ;
 static bool sd_is_entry = true;
 
 #define ENTRY if(sd_is_entry){sd_is_entry=false;
@@ -46,11 +53,13 @@ void signal_display_set_departure(void) {
 static char buf[50] = {0};
 
 void signal_display_run(void) {
-    sprintf(buf, "disp: s:%d, c:%d", sd_state,
-            ev3_color_sensor_get_color(reader_sensor_port));
-    msg_f(buf, 5);
+    if( sd_state != sd_state_old) {
+        msg_f(state_msg[sd_state], 1);
+    }
+    sd_state_old = sd_state;
 
     rotator_run();
+
     switch( sd_state ) {
     case SD_INIT:
         ENTRY
