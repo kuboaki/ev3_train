@@ -65,7 +65,7 @@
 
 注意：表示中の信号を読み取るためのブロックには、ステッカーを貼っています。色はLEGOブロックの青と黄色に似せています。
 
-![ev3_train_block_signal](images/block_signal_04_w_cables.png)
+![ev3_train_block_signal](images/block_signal_05_w_cables.png)
 
 
 ### 手動スイッチ

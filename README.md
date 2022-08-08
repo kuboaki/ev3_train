@@ -47,7 +47,7 @@ Signal display unit uses L-Motor, touch sensors, color sensor.
 
 Note: Stickers are attached on the bricks for reading the displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
 
-![ev3_train_block_signal](images/block_signal_04_w_cables.png)
+![ev3_train_block_signal](images/block_signal_05_w_cables.png)
 
 ### Manual switch
 

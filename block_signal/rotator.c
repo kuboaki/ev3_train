@@ -81,4 +81,5 @@ void rotator_run(void) {
             rotator_rotate_op = false;
         END
         break;
+    }
 }
