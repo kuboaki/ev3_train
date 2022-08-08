@@ -23,7 +23,7 @@ So I decided to try using an old sign board signal, like the shown this video.
 
 ![ev3_train_system_overview](images/train_control_system_03_w_cables.png)
 
-## Train(Locomotive)
+## Train(Sorry, Locomotive only yet...)
 
 Train uses M-Motor, color sensor and touch sensor.
 
