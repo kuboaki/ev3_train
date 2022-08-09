@@ -11,6 +11,7 @@
 extern void rotator_init(void);
 extern void rotator_run(void);
 extern void rotator_rotate(void);
-extern bool rotator_is_rotating(void);
+extern void rotator_stop(void);
+extern bool rotator_is_rotated(void);
 
 #endif // ROTATOR_H_

@@ -23,8 +23,8 @@ typedef enum _signal_type_t {
 
 extern void signal_display_init(void);
 extern void signal_display_run(void);
-extern void signal_display_set_departure(void);
-extern void signal_display_set_stop(void);
-extern signal_type_t signal_display_get_current(void);
+extern void signal_display_set_operation_departure(void);
+extern void signal_display_set_operation_stop(void);
+extern signal_type_t signal_display_get_current_signal(void);
 
 #endif

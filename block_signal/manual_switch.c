@@ -15,10 +15,5 @@ void manual_switch_init(void) {
 }
 
 bool manual_switch_is_pushed(void) {
-    bool current = ev3_touch_sensor_is_pressed(manual_switch_sensor_port);
-    if( current == false && saved == true ) {
-        return true;
-    } else {
-        return false;
-    }
+    return ev3_touch_sensor_is_pressed(manual_switch_sensor_port);
 }

@@ -35,6 +35,7 @@ void train_init(void) {
     signal_reader_init();
     operation_switch_init();
     tr_state = TR_INIT;
+    tr_state_old = TR_INIT;
     tr_is_entry = true;
 }
 
