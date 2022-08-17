@@ -48,7 +48,7 @@ bool train_signal_is_departure(void) {
 }
 
 void train_run(void) {
-    if( tr_state == tr_state_old ) {
+    if( tr_state != tr_state_old ) {
         msg_f(state_msg[tr_state], 2);
     }
     tr_state_old = tr_state;
