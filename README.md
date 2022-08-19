@@ -142,9 +142,8 @@ For transfer instructions, see the EV3RT website.
 3. Place the train on the tracks and put the wheels on the rails.
 3. When you press the operation button, a confirmation horn sounds and the vehicle starts running.
 4. When the signal reader unit (using color sensor mounted upward) reads the stop signal (red), an arrival horn sounds and the train stops.
-5. 信号読取り部が、進行信号（緑）を読み取ると、確認音が鳴り、走行を再開します。
-When the signal reader unit reads the departure signal (green), a confirmation horn sounds and the train resumes running.
-4. When the operation button is pressed, the train stops in the operation end state.
+5. When the signal reader unit reads the departure signal (green), a confirmation horn sounds and the train resumes running.
+6. When the operation button is pressed, the train stops in the operation end state.
 
 
 ### Oparate the singal
