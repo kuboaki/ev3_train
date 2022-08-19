@@ -138,22 +138,22 @@ For transfer instructions, see the EV3RT website.
 ### Run the train
 
 1. Launch the transferred program. (See the EV3RT website for how to start.)
-2. When activated, a warning horn sounds and the vehicle waits for an instruction to start running.
-3. Place the train on the tracks and put the wheels on the rails.
-3. When you press the operation button, a confirmation horn sounds and the vehicle starts running.
-4. When the signal reader unit (using color sensor mounted upward) reads the stop signal (red), an arrival horn sounds and the train stops.
-5. When the signal reader unit reads the departure signal (green), a confirmation horn sounds and the train resumes running.
-6. When the operation button is pressed, the train stops in the operation end state.
+1. When activated, a warning horn sounds and the vehicle waits for an instruction to start running.
+1. Place the train on the tracks and put the wheels on the rails.
+1. When you press the operation button, a confirmation horn sounds and the vehicle starts running.
+1. When the signal reader unit (using color sensor mounted upward) reads the stop signal (red), an arrival horn sounds and the train stops.
+1. When the signal reader unit reads the departure signal (green), a confirmation horn sounds and the train resumes running.
+1. When the operation button is pressed, the train stops in the operation end state.
 
 
 ### Oparate the singal
 
 1. Launch the transferred program.
-2. When activated, a confirmation horn sounds, the motor rotates, and the preparatory operation begins.
-3. When the stop signal appears (red saide down), the motor will stop.
-4. When the train comes under the signal, it reads the stop signal and stops.
-5. When you press the manual switch, the motor rotates and the signal shows the departure signal (green side down).
-6. When the train detector (using ultrasonic sensor) recognizes a running train, the signal changes to a stop signal.
+1. When activated, a confirmation horn sounds, the motor rotates, and the preparatory operation begins.
+1. When the stop signal appears (red saide down), the motor will stop.
+1. When the train comes under the signal, it reads the stop signal and stops.
+1. When you press the manual switch, the motor rotates and the signal shows the departure signal (green side down).
+1. When the train detector (using ultrasonic sensor) recognizes a running train, the signal changes to a stop signal.
 
 The video below shows the behavior of trains and signal.
 Click the thumbnail below to play the video.
