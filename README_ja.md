@@ -179,6 +179,9 @@ $ ls -l app
 
 [![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNs)
 
+BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+
+![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
 
 ## 信号機前で徐行する列車の運転
 
@@ -202,3 +205,8 @@ $ ls -l app
 列車が信号の手前で徐行している様子。サムネールをクリックすると動画を再生します。
 
 [![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
+
+
+Trainクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+
+![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)

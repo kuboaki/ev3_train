@@ -154,14 +154,16 @@ When the signal reader unit reads the departure signal (green), a confirmation h
 3. When the stop signal appears (red saide down), the motor will stop.
 4. When the train comes under the signal, it reads the stop signal and stops.
 5. When you press the manual switch, the motor rotates and the signal shows the departure signal (green side down).
-6. 列車通過監視部（線路脇に設置した超音波センサー）が走行した列車を認識すると、信号機が停止信号に変わります。
-When the train detector (using ultrasonic sensor) recognizes a running train, the signal changes to a stop signal.
+6. When the train detector (using ultrasonic sensor) recognizes a running train, the signal changes to a stop signal.
 
 The video below shows the behavior of trains and signal.
 Click the thumbnail below to play the video.
 
 [![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNs)
 
+State Machine of BlockSignal class (see more detail in [models](./models) directory).
+
+![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
 
 ## Train slowing down before the signal
 
@@ -186,3 +188,7 @@ The video below shows the train slowing down before the signal.
 Click the thumbnail below to play the video.
 
 [![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
+
+State Machine of Train class (see more detail in [models](./models) directory).
+
+![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)

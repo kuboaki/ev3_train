@@ -19,22 +19,14 @@ The method (function in C) corresponding to the state machine diagram uses a sim
 
 ## Contents
 
-NOTE: Sorry, Some file names uses Japanese.
+NOTE: Sorry, contents of all diagrams use Japanese.
 
-models
-├── train_control_system
-│   ├── BlockSignal
-│   │   ├── BlockSignal
-│   │   │   └── BlockSignalクラスのrunのステートマシン図.png
-│   │   ├── Blocksignalサブシステムのクラス図.png
-│   │   ├── Rotator
-│   │   │   └── Rotatorクラスのrunメソッドのステートマシン図.png
-│   │   └── SignalDisplay
-│   │       └── SignalDisplayクラスのrunのステートマシン図.png
-│   ├── System
-│   │   └── Systemのクラス図.png
-│   └── Train
-│       ├── Train
-│       │   └── Trainクラスのrunのステートマシン図.png
-│       └── Trainサブシステムのクラス図.png
-└── train_control_system.asta
+* [Train Control System Model file (modeling tool astah's model file)](train_control_system.asta)
+* [System Class Diagram](System_class_diagram.png)
+* [Block Signal subsystem class diagram](BlockSignal_subsystem_class_diagram.png)
+* [BlockSignal classs run method state machine diagram](BlockSignal_classs_run_method_stm.png)
+* [Rotator class run method state Machine diagram](Rotator_class_run_method_stm.png)
+
+* [SignalDisplay class run method state machine diagram](SignalDisplay_class_run_method_stm.png)
+* [Train subsystem class diagram](Train_subsystem_class_diagram.png)
+* [Train class run methodstate machine diagram](Train_class_run_method_stm.png)
