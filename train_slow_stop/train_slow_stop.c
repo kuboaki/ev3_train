@@ -21,7 +21,6 @@ static char* state_msg[TNUM_TRAIN_STATE] = {
 };
 
 static train_state tr_state = TR_INIT;
-static train_state tr_state_old = TR_INIT;
 static bool tr_is_entry = true;
 
 
@@ -36,7 +35,6 @@ void train_init(void) {
     signal_reader_init();
     operation_switch_init();
     tr_state = TR_INIT;
-    tr_state_old = TR_INIT;
     tr_is_entry = true;
 }
 
@@ -53,10 +51,9 @@ bool train_signal_is_departure(void) {
 }
 
 void train_run(void) {
-    if( tr_state == tr_state_old ) {
+    if( tr_is_entry ) {
         msg_f(state_msg[tr_state], 2);
     }
-    tr_state_old = tr_state;
 
     switch( tr_state ) {
     case TR_INIT:

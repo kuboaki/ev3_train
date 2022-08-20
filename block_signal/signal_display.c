@@ -25,7 +25,6 @@ static char* color_name[TNUM_COLOR] = {
 };
 
 static signal_display_state sd_state = SD_INIT;
-static signal_display_state sd_state_old = SD_INIT;
 static bool sd_is_entry = true;
 
 #define ENTRY if(sd_is_entry){sd_is_entry=false;
@@ -80,15 +79,13 @@ void signal_display_init(void) {
     ev3_sensor_config(reader_sensor_port, reader_sensor_type);
     dly_tsk(50U * 1000U);
     sd_state = SD_INIT;
-    sd_state_old = SD_INIT;
     signal_operation = SOP_STOP;
 }
 
 void signal_display_run(void) {
-    if( sd_state != sd_state_old ) {
+    if( sd_is_entry ) {
         msg_f(state_msg[sd_state], 2);
     }
-    sd_state_old = sd_state;
 
     switch( sd_state ) {
     case SD_INIT:

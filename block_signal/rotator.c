@@ -17,7 +17,6 @@ static char* state_msg[TNUM_ROTATOR_STATE] = {
 };
 
 static rotator_state rs_state = RS_INIT;
-static rotator_state rs_state_old = TNUM_ROTATOR_STATE;
 static bool rs_is_entry = true;
 
 #define ENTRY if(rs_is_entry){rs_is_entry=false;
@@ -60,10 +59,9 @@ void rotator_stop(void) {
 }
 
 void rotator_run(void) {
-    if( rs_state != rs_state_old ) {
+    if( rs_is_entry ) {
         msg_f(state_msg[rs_state], 3);
     }
-    rs_state_old = rs_state;
 
     switch(rs_state ) {
     case RS_INIT:

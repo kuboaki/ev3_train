@@ -19,7 +19,6 @@ static char* state_msg[TNUM_BLOCK_SIGNAL_STATE] = {
 };
 
 static block_signal_state bs_state = BS_INIT;
-static block_signal_state bs_state_old = TNUM_BLOCK_SIGNAL_STATE;
 static bool bs_is_entry = true;
 
 #define ENTRY if(bs_is_entry){bs_is_entry=false;
@@ -46,10 +45,9 @@ void block_signal_init(void) {
 }
 
 void block_signal_run(void) {
-    if( bs_state != bs_state_old) {
+    if( bs_is_entry ) {
         msg_f(state_msg[bs_state], 1);
     }
-    bs_state_old = bs_state;
 
     switch( bs_state ) {
     case BS_INIT:
