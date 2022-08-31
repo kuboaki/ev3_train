@@ -19,7 +19,7 @@ The method (function in C) corresponding to the state machine diagram uses a sim
 
 ## Contents
 
-NOTE: Sorry, contents of all diagrams use Japanese.
+NOTE: Sorry, contents of all diagrams written in Japanese.
 
 * [Train Control System Model file (modeling tool astah's model file)](train_control_system.asta)
 * [System Class Diagram](System_class_diagram.png)
