@@ -101,6 +101,7 @@ void train_run(void) {
             horn_warning();
         DO
         EVTCHK(train_signal_is_stop(),TR_STOP)
+        EVTCHK(train_signal_is_departure(),TR_FORWARDING)
         EVTCHK(operation_switch_is_pushed(),TR_EXIT)
         EXIT
         END
