@@ -1,0 +1,26 @@
+[端末A]
+$ bash docker/run.bash
+$ bash hako-install.bash
+
+Unityアプリ(tb3.exe)を起動する
+
+[端末A]
+root@DESKTOP-7UPRUP4:~/workspace/hakoniwa-ros2sim/ros2/workspace# bash launch.bash
+IP_ADDR is 172.18.249.92 (eth0)
+[INFO] [1659686968.122086200] [UnityEndpoint]: Starting server on 172.18.249.92:10000
+[INFO] [1659686968.166578900] [UnityEndpoint]: Connection from 172.18.240.1
+[INFO] [1659686968.834893500] [UnityEndpoint]: RegisterSubscriber(EV3TrainModel_ev3_actuator, <class 'ev3_msgs.msg._ev3_pdu_actuator.Ev3PduActuator'>) OK
+[INFO] [1659686968.863257500] [UnityEndpoint]: RegisterSubscriber(EV3SignalModel_ev3_actuator, <class 'ev3_msgs.msg._ev3_pdu_actuator.Ev3PduActuator'>) OK
+[INFO] [1659686968.989207700] [UnityEndpoint]: RegisterSubscriber(/tf, <class 'tf2_msgs.msg._tf_message.TFMessage'>) OK
+[INFO] [1659686969.019159900] [UnityEndpoint]: RegisterPublisher(EV3TrainModel_ev3_sensor, <class 'ev3_msgs.msg._ev3_pdu_sensor.Ev3PduSensor'>) OK
+[INFO] [1659686969.048971100] [UnityEndpoint]: RegisterPublisher(EV3SignalModel_ev3_sensor, <class 'ev3_msgs.msg._ev3_pdu_sensor.Ev3PduSensor'>) OK
+
+[端末B]
+# bash run.bash ev3 EV3SignalModel signal
+
+
+[端末C]
+# bash run.bash ev3 EV3TrainModel train
+
+Unityアプリのシミュレーションを開始する．
+あとは動画見てください．
