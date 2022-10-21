@@ -42,7 +42,7 @@ This signal consists of a signal display unit, operation switch and a train dete
 
 ### Signal display unit
 
-Signal display unit uses L-Motor, touch sensors, color sensor.
+Signal display unit provides a mechanism for switching signals by rotating the pallet.
 
 * L-Motor(Large Motor): rotating signal pallets for displaying signal.
 * touch sensor: detecting signal display motor rotation.
@@ -54,15 +54,15 @@ Note: Stickers are attached on the bricks for reading the displayed signal. The 
 
 ### Manual switch
 
-Manual switch uses touch sensor.
+Manual switch is used to change singal.
 
 * touch sensor: manual switch.
 
 ### Train detector
 
-Train detector uses ultrasonic sensor.
+Train detector is used to detect passing trains.
 
-* ultrasocnic sensor: manual switch.
+* ultrasocnic sensor: train detector.
 
 <img src="images/train_detector_02.png" width="75%">
 
@@ -160,6 +160,10 @@ Click the thumbnail below to play the video.
 
 [![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNs)
 
+State Machine of Train class (see more detail in [models](./models) directory).
+
+![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)
+
 State Machine of BlockSignal class (see more detail in [models](./models) directory).
 
 ![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
@@ -181,13 +185,15 @@ Transfer this `app` file to the train's EV3.
 
 You can save the first one as well if you give it a different name (e.g. "app_slow") when transferring.
 
-If you can transfer it, let's run it.
+Let's run it after transferring.
 
 The video below shows the train slowing down before the signal.
 Click the thumbnail below to play the video.
 
 [![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
 
+Added "slowing_down" state on the train state machine diagram.
+
 State Machine of Train class (see more detail in [models](./models) directory).
 
-![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)
+![Train SLow Stopclasss run method state machine diagram](models/Train_Slow_Stop_class_run_method_stm.png)

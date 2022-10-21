@@ -56,9 +56,11 @@
 
 閉塞信号機では、列車が信号を通過すると、信号の現示を「停止」にします。
 
-この信号機は、信号表示部と列車通過監視部で構成してあります。
+この信号機は、信号表示部、手動スイッチ、列車通過監視部で構成してあります。
 
 ### 信号表示部
+
+信号表示部は、パレットを回転させて信号を切り替える機構を提供しています。
 
 * L-Motor(Large Motor): 信号表示用のパレットの回転用
 * touch sensor: 信号表示モーターの回転の監視用
@@ -77,7 +79,7 @@
 
 ### 列車通過監視部
 
-列車の通過を監視します。
+列車通過監視部は、列車の通過を監視します。
 列車通過監視部には、超音波センサーを使っています。
 
 * ultrasonic sensor: 列車の通過を監視する
@@ -179,12 +181,12 @@ $ ls -l app
 
 [![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNsef)
 
-Trainクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+Trainクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
 ![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)
 
 
-BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
 ![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
 
@@ -211,6 +213,8 @@ $ ls -l app
 
 [![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
 
-Train_slow_down_クラスののrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+列車のステートマシン図には「減速走行中」の状態を追加しました。
+
+Train_slow_down_クラスののrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
 ![Train SLow Stopclasss run method state machine diagram](models/Train_Slow_Stop_class_run_method_stm.png)
