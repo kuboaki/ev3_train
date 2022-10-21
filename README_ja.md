@@ -109,7 +109,7 @@ EV3RTのバージョンは、1.1-releaseです。これより古い環境で動�
 ├── images: LEGO Studio, Blender, png
 ├── models: system design model(uml)
 ├── block_signal: coes for block signal
-├── train_slow_stop: coes for train slow down stop
+├── train_slow_stop: codes for train slow down stop
 └── train: codes for train
 ```
 

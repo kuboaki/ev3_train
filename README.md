@@ -86,7 +86,7 @@ Of course, any other programming language that supports the EV3 will work just f
 ├── images: LEGO Studio, Blender, png
 ├── models: system design model(uml)
 ├── block_signal: coes for block signal
-├── train_slow_stop: coes for train slow down stop
+├── train_slow_stop: codes for train slow down stop
 └── train: codes for train
 ```
 
