@@ -28,17 +28,43 @@ So I decided to try using an old sign board signal, like the shown this video.
 
 ## Train(Sorry, Locomotive only yet...)
 
-Train uses M-Motor, color sensor and touch sensor.
+This Train is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
 
-* M-Motor(Medium Motor): drive unit.
+### Drive Unit
+
+Drive Unit provides a mechanism that runs on wheels by rotating a motor.
+
+* M-Motor(Medium Motor): rotating motor.
+
+### Singal Reader
+
+Singal Reader provides reading signal on behalf of the driver.
+
 * color sensor: reading signal.
-* touch sensor: oparation button(departure/stop).
+
+### Oparation Button(departure/stop).
+
+* touch sensor: accept departure or stop operation.
 
 <img src="images/train_01_w_cables.png" width="75%">
 
+モーターには、EV3のキットに付属するM-Motorを使っています。
+モーターにCity Train のパーツを使うと簡便なのですが、EV3から使うには、カスタマイズしたケーブルが必要になります。また、このプロジェクトで使う開発環境（EV3RT）ではCity Trainのモーターがサポートされていません。
+
+I use the M-Motor included in the EV3 kit.
+It's easy to use City Train parts for the motor, but to use it from EV3, we'll need a customized cable. Also, the development environment (EV3RT) used for this project does not support City Train motors.
+
 ## Block signal
 
+This Block signal is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
+
 This signal consists of a signal display unit, operation switch and a train detector.
+
+
+This type of signal is called a block signal.
+For safety, after the train has passed through the section ahead of this signal, the signal is set to "stop" to prevent other trains from entering the section ahead of the signal until the train is gone.
+A traffic control method that allows only one train to run in a section separated by signals in this way is called "blockage control".
+The interval between a signal and the next signal is called an occluded interval.
 
 ### Signal display unit
 
@@ -76,9 +102,14 @@ Please see `.io` files in `images` directory.
 ## Development Environment
 
 TOPPERS/EV3RT (Real-Time platform for EV3) and C are used for program development.
+Older version codes should be modified to be able to run on 1.1.
+We recommend updating to 1.1.
+
 Of course, any other programming language that supports the EV3 will work just fine.
 
 [EV3RT on TOPPERS](https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT)
+
+NOTE: If you want to simulate using the hakoniwa-ros2sim environment, please refer to [How to simulate](hakoniwa-ros2sim_simulation.md) (sorry, only for Japanese).
 
 ## Contents Tree
 
