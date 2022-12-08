@@ -77,7 +77,7 @@ bool signal_display_is_operation_req_departure(void) {
 
 void signal_display_init(void) {
     ev3_sensor_config(reader_sensor_port, reader_sensor_type);
-    dly_tsk(50U * 1000U);
+    dly_tsk(500U * 1000U);
     sd_state = SD_INIT;
     signal_operation = SOP_STOP;
 }

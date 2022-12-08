@@ -46,13 +46,11 @@ Singal Reader provides reading signal on behalf of the driver.
 
 * touch sensor: accept departure or stop operation.
 
+### DriveUnit(forward/slowdown/stop).
+
 <img src="images/train_01_w_cables.png" width="75%">
 
-モーターには、EV3のキットに付属するM-Motorを使っています。
-モーターにCity Train のパーツを使うと簡便なのですが、EV3から使うには、カスタマイズしたケーブルが必要になります。また、このプロジェクトで使う開発環境（EV3RT）ではCity Trainのモーターがサポートされていません。
-
-I use the M-Motor included in the EV3 kit.
-It's easy to use City Train parts for the motor, but to use it from EV3, we'll need a customized cable. Also, the development environment (EV3RT) used for this project does not support City Train motors.
+Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I use the M motor from the EV3 kit.
 
 ## Block signal
 

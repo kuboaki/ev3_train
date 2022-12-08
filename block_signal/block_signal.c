@@ -38,7 +38,7 @@ bool signal_display_is_departure(void) {
 void block_signal_init(void) {
     manual_switch_init();
     train_detector_init();
-    dly_tsk(1000U * 100U);
+    dly_tsk(3000U * 1000U);
     horn_confirmation();
     bs_state = BS_INIT;
     bs_is_entry = true;
