@@ -30,11 +30,15 @@ So I decided to try using an old sign board signal, like the shown this video.
 
 This Train is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
 
+<img src="images/train_01_w_cables.png" width="75%">
+
 ### Drive Unit
 
 Drive Unit provides a mechanism that runs on wheels by rotating a motor.
 
 * M-Motor(Medium Motor): rotating motor.
+
+Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I use the M motor from the EV3 kit.
 
 ### Singal Reader
 
@@ -46,11 +50,6 @@ Singal Reader provides reading signal on behalf of the driver.
 
 * touch sensor: accept departure or stop operation.
 
-### DriveUnit(forward/slowdown/stop).
-
-<img src="images/train_01_w_cables.png" width="75%">
-
-Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I use the M motor from the EV3 kit.
 
 ## Block signal
 
