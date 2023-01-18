@@ -28,7 +28,7 @@
 * 閉塞信号機（信号表示部と列車通過監視部）
 
 
-<img src="images/train_control_system_03_w_cables.png" width="75%">
+<img src="images/train_control_system_w_yellow_signal_w_cables_2.png" width="75%">
 
 
 ## 列車（実は機関車だけですが…）
