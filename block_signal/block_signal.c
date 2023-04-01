@@ -69,10 +69,13 @@ void block_signal_run(void) {
         break;
     case BS_STOPPED:
         ENTRY
+            timer_start(30000*1000U);
         DO
         EVTCHK(manual_switch_is_pushed(),BS_TO_DEP)
         // EVTCHK(司令室からの指示を受け取った(),BS_TO_DEP)
+        EVTCHK(timer_is_timedout(),BS_TO_DEP)
         EXIT
+            timer_stop();
         END
         break;
     case BS_TO_DEP:
