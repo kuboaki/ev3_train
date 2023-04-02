@@ -170,6 +170,8 @@ $ ls -l app
 
 ## システムを実行する
 
+![EV3 Train System Desc](images/train_control_system_w_yellow_signal_w_memo.png)
+
 ### 列車を走行する
 
 1. 転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。
@@ -200,7 +202,7 @@ Trainクラスのrunメソッドのステートマシン図（詳細は [models]
 
 BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
-![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
+![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm_2.png)
 
 ## 信号機前で徐行する列車の運転
 

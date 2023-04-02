@@ -11,9 +11,10 @@ static bool saved = false;
 
 void manual_switch_init(void) {
     saved = false;
-    ev3_sensor_config(manual_switch_sensor_port, manual_switch_sensor_type);
+    // ev3_sensor_config(manual_switch_sensor_port, manual_switch_sensor_type);
 }
 
 bool manual_switch_is_pushed(void) {
-    return ev3_touch_sensor_is_pressed(manual_switch_sensor_port);
+    // return ev3_touch_sensor_is_pressed(manual_switch_sensor_port);
+    return ev3_button_is_pressed(LEFT_BUTTON);
 }

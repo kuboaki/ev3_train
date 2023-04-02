@@ -163,6 +163,8 @@ For transfer instructions, see the EV3RT website.
 
 ## Operate the entire system
 
+![EV3 Train System Desc](images/train_control_system_w_yellow_signal_w_memo.png)
+
 ### Run the train
 
 1. Launch the transferred program. (See the EV3RT website for how to start.)
@@ -194,7 +196,7 @@ State Machine of Train class (see more detail in [models](./models) directory).
 
 State Machine of BlockSignal class (see more detail in [models](./models) directory).
 
-![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
+![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm_2.png)
 
 ## Train slowing down before the signal
 
