@@ -6,6 +6,13 @@
 
 [hakoniwa-ros2sim](https://github.com/toppers/hakoniwa-ros2sim) を参照して、Hakoniwa ROS Simulatorの環境を用意します。
 
+上記手順のUnityのデータを操作する前までをやって、下記のUnityアプリを入手するところへ進みます。
+
+できれば、まず上記のページでTurtleBot3を動かしてみましょう。
+それから下記へ進むことを推奨します。
+そうすれば、セキュリティやファイアウォールの設定を調整しておけるでしょう。
+
+
 ### ev3_train用Unityアプリを入手する
 
 ev3_train用Unityアプリを下記リンク先から入手します。
@@ -16,7 +23,7 @@ NOTE: ファイルサイスが 100MB 以上あることに注意してくださ�
 
 展開して得られる `ev3_train` フォルダを、 `ros2/unity` フォルダの中に配置します。
 
-```shell
+<pre>
 ros2/unity/ev3_train
 ├── MonoBleedingEdge
 ├── UnityCrashHandler64.exe
@@ -26,7 +33,7 @@ ros2/unity/ev3_train
 ├── ev3_train_Data
 （略）
 └── writer_connectors.json
-```
+</pre>
 
 ### Dockerが起動していることを確認する
 
@@ -40,11 +47,11 @@ ros2/unity/ev3_train
 
 ターミナルを起動して、hakoniwa-ros2simをCloneしたディレクトリへ移動します。
 
-たとえば、ユーザー`kuboaki` のホームディレクトリの中に `v1.1.3` をCloneした場合だと次のようになります。
+たとえば、ユーザー`kuboaki` のホームディレクトリの中に `v1.1.4` をCloneした場合だと次のようになります。
 
 ```shell
 $ cd /mnt/c/Users/kuboaki/
-$ git clone --recursive -b v1.1.3 https://github.com/toppers/hakoniwa-ros2sim.git
+$ git clone --recursive -b v1.1.4 https://github.com/toppers/hakoniwa-ros2sim.git
 $ cd hakoniwa-ros2sim
 $ pwd
 /mnt/c/Users/kuboaki/hakoniwa-ros2sim
@@ -59,7 +66,7 @@ root@jake64:~/workspace/hakoniwa-ros2sim/ros2/workspace#
 
 コンテナのシェルが起動したら、 `hako-install.bash` スクリプトを実行して、シミュレーションに必要なパッケージをインストールします。
 
-```shell
+``` shell
 $ bash hako-install.bash
 ###Phase1(msg): Parsing ros_msgs from settings/tb3/RosTopics.json
 （略）
@@ -69,6 +76,7 @@ $ bash hako-install.bash
 （略）
 ###Phase4(code): Success
 ```
+
 ## Unityアプリを起動する
 
 
