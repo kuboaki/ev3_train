@@ -1,7 +1,0 @@
-train_control_system_2.astaは、チェンジビジョンのウェビナーのときに見直したモデル。
-
-TrainSlowStopのLED点灯部分を見直して、status_indicatorを追加している。
-ただし、クラス図は、セミナー資料用にノートを削除するなどしているので、注意。
-
-train_slow_stop_2 が、見直したTrainSlowStopに合わせた実装。
-（BlockSignalも合わせて修正すべきだが、モデルも修正は途中、コードは未着手）
