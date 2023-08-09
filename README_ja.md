@@ -12,7 +12,7 @@
 
 * The Signal Engineers - 1962 - Electrical Engineering on the Railway
 
-下記のサムネールをクリックすると動画を再生します。
+下記のサムネイルをクリックすると動画を再生します。
 
 [![The Signal Engineers - 1962 - Electrical Engineering on the Railway](http://img.youtube.com/vi/6Oc_50DnGG0/hqdefault.jpg)](https://youtu.be/6Oc_50DnGG0?t=81)
 
@@ -28,37 +28,48 @@
 * 閉塞信号機（信号表示部と列車通過監視部）
 
 
-<img src="images/train_control_system_03_w_cables.png" width="75%">
+<img src="images/train_control_system_w_yellow_signal_w_cables_2.png" width="75%">
 
 
 ## 列車（実は機関車だけですが…）
 
-列車は、LEGO Mindstorms EV3とLEGO City Train のパーツを使って製作しました。
-
-* M-Motor(Medium Motor): 走行ユニット
-* color sensor: 信号読取り器
-* touch sensor: 操作ボタン（進行・停止）
+列車は、LEGO Mindstorms EV3のキットとLEGO City Train のパーツを使って製作しました。
 
 <img src="images/train_01_w_cables.png" width="75%">
 
-モーターには、EV3のキットに付属するM-Motorを使っています。
-モーターにCity Train のパーツを使うと簡便なのですが、EV3から使うには、カスタマイズしたケーブルが必要になります。また、このプロジェクトで使う開発環境（EV3RT）ではCity Trainのモーターがサポートされていま
-せん。
+### 走行ユニット
+
+走行ユニットは、列車が線路に沿って走行する働きを提供しています。
+
+* M-Motor(Medium Motor): 車輪の回転用
+
+City Train用のモーターは、EV3と一緒に使うのは簡単ではありません。また、EV3RT（このプロジェクトで使用する開発環境）は City Train モーターをサポートしていません。以上の理由から、私は、EV3キットのMモーターを使用しています。
+
+### 信号読み取り器
+
+この列車には運転手がいないので、信号読み取り器は運転手に代わって信号を読み取ります。
+
+* color sensor: 信号の読取り用
+
+### 操作ボタン（進行・停止）
+
+列車は、操作ボタンの操作によって、列車の進行・停止の指示を受け付けます。
+
+* touch sensor: 列車にの進行・停止の指示の受け付け用
 
 ## 信号機
 
 信号機は、LEGO Mindstorms EV3とその他のLEGO のパーツを組み合わせて製作しました。
 
-信号機は、閉塞信号機というものです。
+この信号機は、信号表示部、手動スイッチ、列車通過監視部で構成してあります。
 
-安全のために、その信号から先の区間に列車を通した後は、信号から先の区間から列車がいなくなるまで、他の列車が入れないようにします。このように信号で区切られた区間に1つの列車だけが走るようにする運行制御方式を、閉塞制御といいます。信号と次の信号の間を閉塞区間といいます。
-
-
-閉塞信号機では、列車が信号を通過すると、信号の現示を「停止」にします。
-
-この信号機は、信号表示部と列車通過監視部で構成してあります。
+この信号機は、閉塞信号機と呼ばれているものです。
+安全のために、この信号から先の区間に列車を通した後は、信号から先の区間から列車がいなくなるまで、他の列車が入れないよう信号の現示を「停止」にします。
+このように信号で区切られた区間に1つの列車だけが走るようにする運行制御方式を、閉塞制御といいます。信号と次の信号の間を閉塞区間といいます。
 
 ### 信号表示部
+
+信号表示部は、パレットを回転させて信号を切り替える機構を提供しています。
 
 * L-Motor(Large Motor): 信号表示用のパレットの回転用
 * touch sensor: 信号表示モーターの回転の監視用
@@ -77,7 +88,7 @@
 
 ### 列車通過監視部
 
-列車の通過を監視します。
+列車通過監視部は、列車の通過を監視します。
 列車通過監視部には、超音波センサーを使っています。
 
 * ultrasonic sensor: 列車の通過を監視する
@@ -94,10 +105,13 @@
 ## 開発環境
 
 開発にはTOPPERS/EV3RT(Real-Time platform for EV3) とCを使っています。
-EV3RTのバージョンは、1.1-releaseです。これより古い環境で動かすにはコードに調整が必要です。
+使用しているEV3RTのバージョンは「1.1-release」です。これより古い環境で動かすには、既存のコードに調整が必要です（1.1に更新したほうがよいでしょう）。
 もちろん、EV3をサポートしている他のプログラミング言語でも、うまく動作するでしょう。
 
 [EV3RT on TOPPERS](https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT)
+
+
+NOTE: hakoniwa-ros2sim環境でシミュレーションする場合は、[シミュレーションの方法](hakoniwa-ros2sim_simulation.md) を参照してください。
 
 
 ## コンテンツの構造
@@ -107,7 +121,7 @@ EV3RTのバージョンは、1.1-releaseです。これより古い環境で動�
 ├── images: LEGO Studio, Blender, png
 ├── models: system design model(uml)
 ├── block_signal: coes for block signal
-├── train_slow_stop: coes for train slow down stop
+├── train_slow_stop: codes for train slow down stop
 └── train: codes for train
 ```
 
@@ -156,6 +170,8 @@ $ ls -l app
 
 ## システムを実行する
 
+![EV3 Train System Desc](images/train_control_system_w_yellow_signal_w_memo.png)
+
 ### 列車を走行する
 
 1. 転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。
@@ -175,18 +191,18 @@ $ ls -l app
 1. 手動スイッチを押すと、モーターが回転して、信号機が進行信号（線路側が緑）を現示します。
 1. 列車通過監視部（線路脇に設置した超音波センサー）が走行した列車を認識すると、信号機が停止信号に変わります。
 
-列車と信号機が動作している様子。サムネールをクリックすると動画を再生します。
+列車と信号機が動作している様子。サムネイルをクリックすると動画を再生します。
 
 [![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNsef)
 
-Trainクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+Trainクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
 ![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)
 
 
-BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+BlockSignalクラスのrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
-![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm.png)
+![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm_2.png)
 
 ## 信号機前で徐行する列車の運転
 
@@ -207,10 +223,12 @@ $ ls -l app
 
 転送できたら、走らせてみましょう。
 
-列車が信号の手前で徐行している様子。サムネールをクリックすると動画を再生します。
+列車が信号の手前で徐行している様子。サムネイルをクリックすると動画を再生します。
 
 [![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
 
-Train_slow_down_クラスののrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照。
+列車のステートマシン図には「減速走行中」の状態を追加しました。
+
+Train_slow_down_クラスののrunメソッドのステートマシン図（詳細は [models](./models) ディレクトリを参照）。
 
 ![Train SLow Stopclasss run method state machine diagram](models/Train_Slow_Stop_class_run_method_stm.png)

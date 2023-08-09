@@ -38,7 +38,7 @@ bool signal_display_is_departure(void) {
 void block_signal_init(void) {
     manual_switch_init();
     train_detector_init();
-    dly_tsk(1000U * 100U);
+    dly_tsk(3000U * 1000U);
     horn_confirmation();
     bs_state = BS_INIT;
     bs_is_entry = true;
@@ -69,10 +69,13 @@ void block_signal_run(void) {
         break;
     case BS_STOPPED:
         ENTRY
+            timer_start(30000*1000U);
         DO
         EVTCHK(manual_switch_is_pushed(),BS_TO_DEP)
         // EVTCHK(司令室からの指示を受け取った(),BS_TO_DEP)
+        EVTCHK(timer_is_timedout(),BS_TO_DEP)
         EXIT
+            timer_stop();
         END
         break;
     case BS_TO_DEP:

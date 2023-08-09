@@ -32,6 +32,7 @@ static bool tr_is_entry = true;
 void train_init(void) {
     drive_unit_init();
     signal_reader_init();
+    dly_tsk(1000U * 1000U);
     operation_switch_init();
     tr_state = TR_INIT;
     tr_is_entry = true;
