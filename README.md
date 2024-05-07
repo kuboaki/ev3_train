@@ -1,6 +1,6 @@
 [English](README.md) | [日本語](README_ja.md)
 
-# Building LEGO Train with Mindstorms EV3
+# [Building LEGO Train with Mindstorms EV3](https://https://github.com/kuboaki/ev3_train/)
 
 This repository provides building instructions and programs for train and signal using LEGO Mindstorms EV3 running on the LEGO City Train rails.
 
