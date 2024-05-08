@@ -9,20 +9,23 @@ usage: find [-H | -L | -P] [-EXdsx] [-f path] path ... [expression]
 
 brew install gnufindutils
 
-して、.zshenvに
+して、~/.zshenvに、
 
-PATH=/opt/homebrew/opt/findutils/libexec/gnubin:$PATH (Apple silicon)
-PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH (Intel Mac)
+Apple silicon Macの場合では、
+PATH=/opt/homebrew/opt/findutils/libexec/gnubin:$PATH
 
+Intel Macの場合は、
+PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
 
-を追加するだけではダメで、
+を追加する…だけではダメなようで、さらに
 
 brew install make
 
-して、.zshenvに
+して、~/.zshenvに
+Apple silicon Macの場合は、
+PATH=/opt/homebrew/opt/make/libexec/gnubin:$PATH
 
-PATH=/opt/homebrew/opt/make/libexec/gnubin:$PATH (Apple silicon)
-PATH=/usr/local/opt/make/libexec/gnubin:$PATH (Intel Mac)
+Intel Macの場合は、
+PATH=/usr/local/opt/make/libexec/gnubin:$PATH
 
-
-する必要がある。
+する。
