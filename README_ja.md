@@ -1,6 +1,6 @@
 [English](README.md) | [日本語](README_ja.md)
 
-# EV3を使ったLEGO Trainの製作
+# [EV3を使ったLEGO Trainの製作](https://https://github.com/kuboaki/ev3_train/)
 
 このリポジトリは、LEGO City Trainのレールを走る列車（あるいは機関車）と、その列車の運行を制御するための信号機などについて、ブロックの組立図や動かすプログラムを提供します。
 
