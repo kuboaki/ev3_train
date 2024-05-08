@@ -25,6 +25,7 @@ So I decided to try using an old sign board signal, like the shown this video.
 ## System Overview
 
 <img src="./images/train_control_system_w_yellow_signal_w_cables_2.png" width="75%">
+<img src="https://media.githubusercontent.com/media/kuboaki/ev3_train/main/images/train_control_system_w_yellow_signal_w_cables_2.png">
 
 ## Train(Sorry, Locomotive only yet...)
 
