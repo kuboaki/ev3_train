@@ -1,0 +1,12 @@
+GEM
+  specs:
+    asciidoctor (2.0.20)
+
+PLATFORMS
+  arm64-darwin-20
+
+DEPENDENCIES
+  asciidoctor
+
+BUNDLED WITH
+   2.4.21

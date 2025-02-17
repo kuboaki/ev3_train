@@ -1,0 +1,26 @@
+BLItemNo,ElementId,LdrawId,PartName,BLColorId,LDrawColorId,ColorName,ColorCategory,Qty,Weight
+2780,6279875,2780,"Technic, Pin with Short Friction Ridges",11,0,Black,Solid Colors,4,0.16
+3033,4211405,3033,Plate 6 x 10,86,71,Light Bluish Gray,Solid Colors,1,7.95
+32002,32002199,32002,"Technic, Pin 3/4",85,72,Dark Bluish Gray,Solid Colors,2,0.11
+32017,6114935,32017,"Technic, Liftarm Thin 1 x 5",11,0,Black,Solid Colors,1,0.58
+32065,4114201,32065,"Technic, Liftarm Thin 1 x 7",24,22,Purple,Solid Colors,2,0.9
+32140,6271827,32140,"Technic, Liftarm, Modified Bent Thick L-Shape 2 x 4",5,4,Red,Solid Colors,1,1.43
+32348,6278132,32348,"Technic, Liftarm, Modified Bent Thick 1 x 7 (4 - 4)",1,15,White,Solid Colors,3,2.0
+32524,4495930,32524,"Technic, Liftarm Thick 1 x 7",86,71,Light Bluish Gray,Solid Colors,2,1.74
+32525,4611705,32525,"Technic, Liftarm Thick 1 x 11",86,71,Light Bluish Gray,Solid Colors,2,2.8
+3673,4211807,3673,"Technic, Pin without Friction Ridges",86,71,Light Bluish Gray,Solid Colors,1,0.16
+3709b,4211444,3709b,"Technic, Plate 2 x 4 with 3 Holes",86,71,Light Bluish Gray,Solid Colors,1,1.15
+3749,4211808,3749,"Technic, Axle  1L with Pin without Friction Ridges",86,71,Light Bluish Gray,Solid Colors,7,0.22
+40490,4195406,40490,"Technic, Liftarm Thick 1 x 9",9,7,Light Gray,Solid Colors,2,2.59
+4274,4211483,4274,"Technic, Pin 1/2 without Friction Ridges",86,71,Light Bluish Gray,Solid Colors,4,0.095
+4519,4211815,4519,"Technic, Axle  3L",86,71,Light Bluish Gray,Solid Colors,1,0.43
+48989,6282158,48989,"Technic, Pin Connector Perpendicular 3L with 4 Pins",86,71,Light Bluish Gray,Solid Colors,2,1.22
+53401,6070018,53401,"Train, Track Plastic (RC Trains) Straight",85,72,Dark Bluish Gray,Solid Colors,1,14.583
+55615,6313453,55615,"Technic, Pin Connector Perpendicular 3 x 3 Bent with 4 Pins",86,71,Light Bluish Gray,Solid Colors,2,1.9
+63869,6331441,63869,"Technic, Axle and Pin Connector Perpendicular Triple",86,71,Light Bluish Gray,Solid Colors,1,1.05
+6536,6261375,6536,"Technic, Axle and Pin Connector Perpendicular",86,71,Light Bluish Gray,Solid Colors,3,0.39
+6558,6299413,6558,"Technic, Pin 3L with Friction Ridges",7,1,Blue,Solid Colors,3,0.31
+95652,,95652,"Electric Sensor, Ultrasonic - EV3",1,15,White,Solid Colors,1,24
+,,,,,,,,,
+Total qty,Total Weight,,,,,,,,
+47,84.513,,,,,,,,
