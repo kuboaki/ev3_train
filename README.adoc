@@ -1,3 +1,28 @@
+:encoding: utf-8
+:lang: en
+// :scripts: cjk
+include::image_size_matter.adoc[]
+include::attributes.adoc[]
+:linkcss:
+:stylesdir: css
+:stylesheet: mystyle.css
+:sectanchors:
+:autofit-option:
+:support-uri:
+:original-support-uri:
+:imagesdir: images
+:sourcesdir: codes
+// :icons: fonts
+:hide-uri-scheme!:
+:figure-caption: 図
+:example-caption: リスト
+:table-caption: 表
+:appendix-caption: 付録
+:xrefstyle: short
+:section-refsig:
+:chapter-refsig:
+
+
 [English](README.html) | [日本語](README_ja.html)
 
 == Building LEGO Train with Mindstorms EV3
@@ -17,13 +42,9 @@ For example, at the beginning of the following video, a traffic signal using a s
 Click the thumbnail below to play the video.
 
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
-video::jTkf5dL1AwU[youtube,t="88",width="320",height="180"]
-
-https://youtu.be/jTkf5dL1AwU?t=88[The Signal Engineers - 1962 - Electrical Engineering on the Railway]
+video::jTkf5dL1AwU[youtube,start="88",width="480",height="270"]
 
 image::http://img.youtube.com/vi/6Oc_50DnGG0/hqdefault.jpg[]
-
-[![The Signal Engineers - 1962 - Electrical Engineering on the Railway](http://img.youtube.com/vi/6Oc_50DnGG0/hqdefault.jpg)](https://youtu.be/6Oc_50DnGG0?t=81)
 
 
 It is interesting that if we could test the train control with signal while moving it at hand.
@@ -31,33 +52,35 @@ So I decided to try using an old sign board signal, like the shown this video.
 
 === System Overview
 
-<img src="./images/train_control_system_w_yellow_signal_w_cables_2.png" width="75%">
-<img src="https://media.githubusercontent.com/media/kuboaki/ev3_train/main/images/train_control_system_w_yellow_signal_w_cables_2.png">
+.System Overview
+image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width}]
 
 === Train(Sorry, Locomotive only yet...)
 
 This Train is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
 
-<img src="./images/train_01_w_cables.png" width="75%">
+.Train(Locomotive)
+image::train_01_w_cables_w_memo.png[{three-quarters-width}]
 
 ==== Drive Unit
 
 Drive Unit provides a mechanism that runs on wheels by rotating a motor.
 
-* M-Motor(Medium Motor): rotating motor.
+* M-Motor(Medium Motor): Drive the wheels.
 
-Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I use the M motor from the EV3 kit.
+Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I 've been using the M motor from the EV3 kit.
 
 ==== Singal Reader
 
-Singal Reader provides reading signal on behalf of the driver.
+This train does not have a driver, so the signal reader reads the signals on behalf of the locomotive driver.
 
-* color sensor: reading signal.
+* Color Sensor: Reading signal.
 
 ==== Oparation Button(departure/stop).
 
-* touch sensor: accept departure or stop operation.
+The train accepts operations to move or stop the train with this control button.
 
+* Touch Sensor: Accept departure or stop operation.
 
 === Block signal
 
@@ -71,34 +94,37 @@ For safety, after the train has passed through the section ahead of this signal,
 A traffic control method that allows only one train to run in a section separated by signals in this way is called "blockage control".
 The interval between a signal and the next signal is called an occluded interval.
 
-==== Signal display unit
+==== Signal Display Unit
 
 Signal display unit provides a mechanism for switching signals by rotating the pallet.
 
-* L-Motor(Large Motor): rotating signal pallets for displaying signal.
-* touch sensor: detecting signal display motor rotation.
-* color sensor: detecting current signal for present.
+* L-Motor(Large Motor): Rotating signal pallets for displaying signal.
+* Touch Sensor: Detecting signal display motor rotation.
+* Color Sensor: Detecting current signal for present.
 
-Note: Stickers are attached on the bricks for reading the displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
+NOTE: Stickers are attached on the bricks for reading the displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
 
-<img src="images/block_signal_05_w_cables.png" width="75%">
+.Block Signal(Display Unit, Manual Switch)
+image::block_signal_05_w_cables.png[{three-quarters-width}]
 
-==== Manual switch
+
+==== Manual Switch
 
 Manual switch is used to change singal.
 
-* touch sensor: manual switch.
+* Touch Sensor: Switch signals manually.
 
-==== Train detector
+==== Train Detector
 
 Train detector is used to detect passing trains.
 
-* ultrasocnic sensor: train detector.
+* Ultrasocnic Sensor: Detecting the passage of a train.
 
-<img src="images/train_detector_02.png" width="75%">
+.Block Signal(Train Detector)
+image::train_detector_02.png[{three-quarters-width}]
 
 
-## Building Instructions
+== Building Instructions
 
 Not ready yet.
 
@@ -112,19 +138,20 @@ We recommend updating to 1.1.
 
 Of course, any other programming language that supports the EV3 will work just fine.
 
-[EV3RT on TOPPERS](https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT)
+EV3RT on TOPPERS:: https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT[]
 
 NOTE: If you want to simulate using the hakoniwa-ros2sim environment, please refer to [How to simulate](hakoniwa-ros2sim_simulation.md) (sorry, only for Japanese).
 
 === Contents Tree
 
-```
+[source,console]
+----
 ├── images: LEGO Studio, Blender, png
 ├── models: system design model(uml)
 ├── block_signal: coes for block signal
 ├── train_slow_stop: codes for train slow down stop
 └── train: codes for train
-```
+----
 
 === Build Program
 
@@ -133,23 +160,26 @@ NOTE: If you want to simulate using the hakoniwa-ros2sim environment, please ref
 EV3RT has a default `workspace` for building programs.
 Clone the `ev3_train` repository in the same hierarchy as workspace.
 
-```shell
+[source,shell]
+----
 $ cd {install_dir}/ev3rt-1.1-release/hrp3/sdk
 $ git clone https://github.com/kuboaki/ev3_train.git
-```
+----
 
 ==== Build train's program
 
 Move to `ev3_train` directory. And then build train program.
 
-```shell
+[source,shell]
+----
 $ cd ev3_train
 $ pwd
 {install_dir}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=train
 $ ls -l app
 -rw-r--r--  1 kuboaki  staff  102204  8  9 17:48 app
-```
+----
+
 Transfer this `app` file to the train's EV3.
 For transfer instructions, see the EV3RT website.
 
@@ -158,22 +188,24 @@ For transfer instructions, see the EV3RT website.
 
 Also in the `ev3_train` directory, build the signal's program.
 
-```shell
+[source,shell]
+----
 $ pwd
 {install_dir}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=block_signal
 $ ls -l app
 -rw-r--r--  1 kuboaki  staff  104932  8  9 17:49 app
-```
+----
 
 Transfer this `app` file to the signal's EV3.
 For transfer instructions, see the EV3RT website.
 
 === Operate the entire system
 
-![EV3 Train System Desc](images/train_control_system_w_yellow_signal_w_memo.png)
+.Oparations of EV3 Train System
+image::train_control_system_w_yellow_signal_w_memo.png[{full-width}]
 
-==== Run the train
+==== Run the train( t1, t2, ... )
 
 . Launch the transferred program. (See the EV3RT website for how to start.)
 . When activated, a warning horn sounds and the vehicle waits for an instruction to start running.
@@ -184,7 +216,7 @@ For transfer instructions, see the EV3RT website.
 . When the operation button is pressed, the train stops in the operation end state.
 
 
-==== Oparate the singal
+==== Oparate the singal( s1, s2, ... )
 
 . Launch the transferred program.
 . When activated, a confirmation horn sounds, the motor rotates, and the preparatory operation begins.
@@ -196,7 +228,8 @@ For transfer instructions, see the EV3RT website.
 The video below shows the behavior of trains and signal.
 Click the thumbnail below to play the video.
 
-[![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNs)
+.EV3 Tran and Signal demo
+video::k168I_5-GNs[youtube,width="480",height="270"]
 
 State Machine of Train class (see more detail in [models](./models) directory).
 
