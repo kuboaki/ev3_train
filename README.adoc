@@ -1,237 +1,347 @@
-[English](README.html) | [日本語](README_ja.html)
+:encoding: utf-8
+:lang: en
+// :scripts: cjk
+:doctype: article
+:twoinches: width='360'
+:full-width: width='100%'
+:extra-width: width='120%'
+:three-quarters-width: width='75%'
+:half-width: width='50%'
+:half-size:
+:one-third-width: width='30%'
+:one-quarter-width: width='25%'
+:thumbnail: width='60'
+:icon: width='30'
+:video-size: width='640',height='360'
+ifeval::["{lang}" == "en"]
+:appendix-caption: Appendix
+:caution-caption: Caution
+:example-caption: Example
+:figure-caption: Figure
+:important-caption: Important
+:last-update-label: Last Updated
+:listing-caption: Listing
+:manname-title: Name
+:note-caption: Note
+:table-caption: Table
+:tip-caption: Tip
+:toc-title: Table of Contents
+:untitled-label: Untitled
+:version-label: Version
+:warning-caption: Warning
+endif::[]
+:linkcss:
+:stylesdir: css
+:stylesheet: mystyle.css
+:sectanchors:
+:autofit-option:
+:support-uri:
+:original-support-uri:
+:imagesdir: images
+:sourcesdir: codes
+:hide-uri-scheme!:
+:figure-caption: Figure
+:example-caption: Listing
+:table-caption: Table
+:appendix-caption: Appendix
+:xrefstyle: short
+:section-refsig:
+:chapter-refsig:
 
-== Building LEGO Train with Mindstorms EV3
+link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
 
-This repository provides building instructions and programs for train and signal using LEGO Mindstorms EV3 running on the LEGO City Train rails.
+== Building a LEGO Train and Signal Using EV3
+
+This repository provides build instructions for LEGO brick train that run on LEGO City Train tracks, as well as system design diagrams and programs using EV3 to control signals and manage train operation.
 
 NOTE: GitHub repository: https://github.com/kuboaki/ev3_train/
 
 === Motivation
 
-In train control, until signals using electric lights became popular, people used moving sign boards to indicate departure or stop.
+Before the widespread use of light-based signals in train control, signboards indicating departure or stop were moved to act as signals.
 
-For example, at the beginning of the following video, a traffic signal using a sign board is introduced.
+For example, in the opening of the following video, a signal using such a signboard is introduced:
 
 * The Signal Engineers - 1962 - Electrical Engineering on the Railway
 
-Click the thumbnail below to play the video.
+Click the thumbnail below to play the part that introduces old signals.
 
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
-video::jTkf5dL1AwU[youtube,t="88",width="320",height="180"]
+video::jTkf5dL1AwU[youtube,start=81,{video-size}]
 
-https://youtu.be/jTkf5dL1AwU?t=88[The Signal Engineers - 1962 - Electrical Engineering on the Railway]
-
-image::http://img.youtube.com/vi/6Oc_50DnGG0/hqdefault.jpg[]
-
-[![The Signal Engineers - 1962 - Electrical Engineering on the Railway](http://img.youtube.com/vi/6Oc_50DnGG0/hqdefault.jpg)](https://youtu.be/6Oc_50DnGG0?t=81)
-
-
-It is interesting that if we could test the train control with signal while moving it at hand.
-So I decided to try using an old sign board signal, like the shown this video.
+It would be interesting to control a moving train with signals right at your fingertips, wouldn’t it?
+So, I decided to build a signal system imitating these old-style signals seen in the video.
 
 === System Overview
 
-<img src="./images/train_control_system_w_yellow_signal_w_cables_2.png" width="75%">
-<img src="https://media.githubusercontent.com/media/kuboaki/ev3_train/main/images/train_control_system_w_yellow_signal_w_cables_2.png">
+This system consists of two main actors:
 
-=== Train(Sorry, Locomotive only yet...)
+* Train (actually, just the locomotive…)
+* Block Signal (signal display section and train detection section)
 
-This Train is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
+.System Overview
+image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width}]
 
-<img src="./images/train_01_w_cables.png" width="75%">
+=== Train (well, just a locomotive…)
+
+The train was built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
+
+.Locomotive made from EV3 and City Train parts
+image::train_01_w_cables_w_memo.png[{three-quarters-width}]
 
 ==== Drive Unit
 
-Drive Unit provides a mechanism that runs on wheels by rotating a motor.
+The drive unit enables the train to run along the tracks.
 
-* M-Motor(Medium Motor): rotating motor.
+.Devices Used
+* M-Motor (Medium Motor): for driving the wheels
 
-Motors for City Train are not easy to use with EV3. Also, EV3RT (the development environment used for this project) does not support City Train motors. For these reasons, I use the M motor from the EV3 kit.
+It’s not straightforward to use the motor for City Train with EV3.
+Moreover, the development environment used in this project (EV3RT) does not support City Train motors.
+For these reasons, I use the M-Motor from the EV3 kit.
 
-==== Singal Reader
+==== Signal Reader
 
-Singal Reader provides reading signal on behalf of the driver.
+Since there’s no driver on this train, a color sensor-based signal reader reads the signals in place of a human operator.
 
-* color sensor: reading signal.
+.Devices Used
+* Color Sensor: for reading signals
 
-==== Oparation Button(departure/stop).
+==== Operation Button
 
-* touch sensor: accept departure or stop operation.
+The train receives instructions to start and stop via an operation button, which uses a touch sensor.
 
+.Devices Used
+* Touch Sensor: for receiving start/stop instructions for the train
 
-=== Block signal
+=== Signal (Block Signal)
 
-This Block signal is built using LEGO Mindstorms EV3 kits and LEGO City Train parts.
+The signal was built by combining LEGO Mindstorms EV3 and other LEGO Technic parts.
 
-This signal consists of a signal display unit, operation switch and a train detector.
+This signal imitates what is known as a block signal.
 
+For safety reasons, once a train passes through a section beyond this signal, the signal indication switches to "Stop" until the train clears that section.
+This operational control method, where only one train runs within a section separated by signals, is called "block control."
+The section between one signal and the next is called a "block section."
 
-This type of signal is called a block signal.
-For safety, after the train has passed through the section ahead of this signal, the signal is set to "stop" to prevent other trains from entering the section ahead of the signal until the train is gone.
-A traffic control method that allows only one train to run in a section separated by signals in this way is called "blockage control".
-The interval between a signal and the next signal is called an occluded interval.
+This signal consists of a signal display unit, a manual switch, and a train detection unit.
 
-==== Signal display unit
+.Block Signal made from EV3 and LEGO Technic parts
+image::block_signal_05_w_cables.png[{three-quarters-width}]
 
-Signal display unit provides a mechanism for switching signals by rotating the pallet.
+==== Signal Display Unit
 
-* L-Motor(Large Motor): rotating signal pallets for displaying signal.
-* touch sensor: detecting signal display motor rotation.
-* color sensor: detecting current signal for present.
+The signal display unit provides a mechanism for switching signal displays by rotating the pallet.
+The signal switching mechanism uses one L-Motor, one Touch Sensor, and one Color Sensor.
 
-Note: Stickers are attached on the bricks for reading the displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
+.Devices Used
+* L-Motor(Large Motor): For rotating the palette for signal display
+* Touch Sensor: For monitoring the rotation of the signal display motor
+* Color Sensor: Reader of the currently displayed signal
 
-<img src="images/block_signal_05_w_cables.png" width="75%">
+NOTE: NOTE: Stickers are attached to the blocks for reading the currently displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
 
-==== Manual switch
+==== Manual Switch
 
-Manual switch is used to change singal.
+Manual switches are used to manually switch signals.
+A touch sensor is used for manual switches.
 
-* touch sensor: manual switch.
+.Devices used
+* Touch Sensor: Switch signals manually
 
-==== Train detector
+You can also switch signals programmatically. This method is used when switching signals when a train passes.
 
-Train detector is used to detect passing trains.
+The EV3 can use Bluetooth communication, so wireless instructions can also be used to switch signals, but the demos in this repository do not provide a demo using this function.
 
-* ultrasocnic sensor: train detector.
+==== Train Detector
 
-<img src="images/train_detector_02.png" width="75%">
+The train detector monitors the passing of trains.
+The train detector uses an ultrasonic sensor.
 
+.Devices used
+* Ultrasonic Sensor: Monitors the passing of trains
 
-## Building Instructions
+.Train detector made with ultrasonic sensors and LEGO Technic parts
+image::train_detector_02.png[{half-width}]
 
-Not ready yet.
+== Build Instruction
 
-Please see `.io` files in `images` directory.
+In the `images` directory of this repository, there are `.io` files of trains and signals created with Bricklink Studio.
 
-=== Development Environment
+By referring to these, you can see what parts are needed for assembly and how to assemble them.
 
-TOPPERS/EV3RT (Real-Time platform for EV3) and C are used for program development.
-Older version codes should be modified to be able to run on 1.1.
-We recommend updating to 1.1.
+Bricklink Studio download page:: https://www.bricklink.com/v3/studio/download.page[]
 
-Of course, any other programming language that supports the EV3 will work just fine.
+== Development environment
 
-[EV3RT on TOPPERS](https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT)
+I use TOPPERS/EV3RT (Real-Time platform for EV3) for development.
 
-NOTE: If you want to simulate using the hakoniwa-ros2sim environment, please refer to [How to simulate](hakoniwa-ros2sim_simulation.md) (sorry, only for Japanese).
+The version of EV3RT I use is "1.1-release".
 
-=== Contents Tree
+To run it in an older environment, you need to adjust the existing code (it's better to update to 1.1).
 
-```
-├── images: LEGO Studio, Blender, png
-├── models: system design model(uml)
-├── block_signal: coes for block signal
-├── train_slow_stop: codes for train slow down stop
-└── train: codes for train
-```
+EV3RT on TOPPERS:: https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT[]
 
-=== Build Program
+The programming language I use for development is C.
 
-==== Clone this ripository in your EV3RT workspace
+Of course, you can use other programming languages ​​that support EV3.
 
-EV3RT has a default `workspace` for building programs.
-Clone the `ev3_train` repository in the same hierarchy as workspace.
+// NOTE: If you want to simulate in the hakoniwa-ros2sim environment, please refer to link:hakoniwa-ros2sim_simulation.md[How to simulate].
 
-```shell
-$ cd {install_dir}/ev3rt-1.1-release/hrp3/sdk
+=== Content structure
+
+[source,conole]
+----
+├─ images: LEGO Studio, Blender, png, etc.
+├─ models: System Design Model(UML)
+├─ block_signal: codes for block signal
+├─ train_slow_stop: codes for train slow down stop
+└─ train: codes for train
+----
+
+=== Build the program
+
+==== Deploy the repository to the EV3RT workspace
+
+In the directory where EV3RT is installed, there is a workspace for building `workspace`.
+Clone `ev3_train` next to it.
+
+[source,console]
+----
+$ cd {E3RT installation location}/ev3rt-1.1-release/hrp3/sdk
 $ git clone https://github.com/kuboaki/ev3_train.git
-```
+$ ls -1
+workspace
+ev3_train
+----
 
-==== Build train's program
+==== Build the Train program
 
-Move to `ev3_train` directory. And then build train program.
+Go to the `ev3_train` directory and build the train program.
 
-```shell
+[source,console]
+----
 $ cd ev3_train
 $ pwd
-{install_dir}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+{installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=train
 $ ls -l app
--rw-r--r--  1 kuboaki  staff  102204  8  9 17:48 app
-```
-Transfer this `app` file to the train's EV3.
-For transfer instructions, see the EV3RT website.
+-rw-r--r-- 1 kuboaki staff 102204 8 9 17:48 app
+----
 
+Transfer this `app` file to the Trains' EV3.
+See the EV3RT website for instructions on how to transfer.
 
-==== Build signal's program
+==== Build the Block Signal program
 
-Also in the `ev3_train` directory, build the signal's program.
+In the same way, build the block signal program in the `ev3_train` directory.
 
-```shell
+[source,console]
+----
 $ pwd
-{install_dir}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+{EV3RT installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=block_signal
 $ ls -l app
--rw-r--r--  1 kuboaki  staff  104932  8  9 17:49 app
-```
+-rw-r--r-- 1 kuboaki staff 104932 8 9 17:49 app
+----
 
-Transfer this `app` file to the signal's EV3.
-For transfer instructions, see the EV3RT website.
+Transfer the built `app` file to the block signal's EV3.
+For instructions on how to transfer, see the EV3RT website.
 
-=== Operate the entire system
+=== Running the System
 
-![EV3 Train System Desc](images/train_control_system_w_yellow_signal_w_memo.png)
+.EV3 Train System in action
+image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
 
-==== Run the train
+==== Running a Train
 
-. Launch the transferred program. (See the EV3RT website for how to start.)
-. When activated, a warning horn sounds and the vehicle waits for an instruction to start running.
-. Place the train on the tracks and put the wheels on the rails.
-. When you press the operation button, a confirmation horn sounds and the vehicle starts running.
-. When the signal reader unit (using color sensor mounted upward) reads the stop signal (red), an arrival horn sounds and the train stops.
-. When the signal reader unit reads the departure signal (green), a confirmation horn sounds and the train resumes running.
-. When the operation button is pressed, the train stops in the operation end state.
+. Start the transferred program. For instructions on how to start the program, see the EV3RT website.
+. When started, a warning sound will sound and the train will wait for instructions to run.
+. Place the train on the tracks and place the wheels on the rails.
+. When you press the operation button, a confirmation sound will sound and the train will run.
+. When the signal reading unit (the color sensor facing upwards) reads a stop signal (red), an arrival sound will sound and the train will stop.
+. When the signal reading unit reads a proceed signal (green), a confirmation sound will sound and the train will resume running.
+. When you press the operation button, the train will stop in the operation completion state.
 
 
-==== Oparate the singal
+==== Controlling the Block Signal
 
-. Launch the transferred program.
-. When activated, a confirmation horn sounds, the motor rotates, and the preparatory operation begins.
-. When the stop signal appears (red saide down), the motor will stop.
-. When the train comes under the signal, it reads the stop signal and stops.
-. When you press the manual switch, the motor rotates and the signal shows the departure signal (green side down).
-. When the train detector (using ultrasonic sensor) recognizes a running train, the signal changes to a stop signal.
+. Start the transferred program. For instructions on how to start the program, see the EV3RT website.
+. When the program is started, a confirmation sound will sound and the motor will rotate and begin preparation.
+. When a stop signal (red facing down) is indicated, the motor will stop.
+. When the train approaches the signal, it will read the stop signal and stop.
+. When the manual switch is pressed, the motor will rotate and the Block Signal will indicate a proceed signal (green on the track side).
+. When the train passage monitor (ultrasonic sensor installed beside the track) detects a passing train, the block signal will change to a stop signal.
 
-The video below shows the behavior of trains and signal.
-Click the thumbnail below to play the video.
+Click the thumbnail below to play the train and the block signal.
+video::k168I_5-GNs[youtube,{video-size}]
 
-[![EV3 Train normal](https://img.youtube.com/vi/k168I_5-GNs/hq3.jpg)](https://youtu.be/k168I_5-GNs)
+=== System Design
 
-State Machine of Train class (see more detail in [models](./models) directory).
+The system design model was created using Astah* Professional by Change Vision.
 
-![Train classs run method state machine diagram](models/Train_class_run_method_stm.png)
+NOTE: Sorry. The model diagram is only available in Japanese.
 
-State Machine of BlockSignal class (see more detail in [models](./models) directory).
+The UML model file `train_control_system.asta` created with Astah* is in the `models` directory.
 
-![BlockSignal classs run method state machine diagram](models/BlockSignal_classs_run_method_stm_2.png)
+The following is an excerpt from the model file.
 
-=== Train slowing down before the signal
+:imagesdir: models/images
 
-Move to `ev3_train` directory. And then build `train_slow_stop`  program.
-This train slows down when it recognizes the warning sign near the signal.
+.Class diagram of the Train subsystem
+image::train_control_system/Train/Train_Subsystem.png[]
 
-```shell
+.State machine diagram of the run method of the Train class
+image::train_control_system/Train/Train/run/stm_Train__run.png[]
+
+.Class diagram of the BlockSignal subsystem
+image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[]
+
+.State machine diagram of the run method of the BlockSignal class
+image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[]
+
+.State machine diagram of the run method of the Rotator class
+image::train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png[{half-width}]
+
+.State machine diagram of the run method of the SignalDisplay class
+image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png[{half-width}]
+
+:imagesdir: images
+
+=== Trains moving slowly just before a Block Signal
+
+In the `ev3_train` directory, build the `train_slow_stop` program.
+This train will slow down when it recognizes the warning sign in front of the signal.
+
+[source,console]
+----
 $ cd ev3_train
 $ pwd
-{install_dir}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+{EV3RT installed location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=train_slow_stop
 $ ls -l app
 -rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app
-```
-Transfer this `app` file to the train's EV3.
+----
 
-You can save the first one as well if you give it a different name (e.g. "app_slow") when transferring.
+Transfer this `app` file to the Trains' EV3.
 
-Let's run it after transferring.
+NOTE: To allow it to coexist with the previous program, give it a different name when transferring.
 
-The video below shows the train slowing down before the signal.
-Click the thumbnail below to play the video.
+Once the transfer is complete, let's try running the train.
 
-[![EV3 Train slow down](https://img.youtube.com/vi/71gXzo7RDiw/hq2.jpg)](https://youtu.be/71gXzo7RDiw)
+Click on the thumbnail below to play the video of the train slowing down in front of the signal.
 
-Added "slowing_down" state on the train state machine diagram.
+.Train slowing down in front of a signal
+video::71gXzo7RDiw[youtube,{video-size}]
 
-State Machine of Train class (see more detail in [models](./models) directory).
+I added a "slow down" state to the train's state machine diagram.
 
-![Train SLow Stopclasss run method state machine diagram](models/Train_Slow_Stop_class_run_method_stm.png)
+:imagesdir: models/images
+
+.Class diagram of the TrainSlowStop subsystem
+image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[]
+
+.State machine diagram of the run method of the TrainSlowStop class
+image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[]
+
+:imagesdir: images
