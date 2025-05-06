@@ -336,16 +336,6 @@ video::71gXzo7RDiw[youtube,{video-size}]
 
 I added a "slow down" state to the train's state machine diagram.
 
-転送できたら、走らせてみましょう。
-
-下記のサムネイルをクリックすると、列車が信号の手前で徐行している様子を再生します。
-
-.列車が信号の手前で徐行している様子
-video::71gXzo7RDiw[youtube,{video-size}]
-
-列車のステートマシン図には「減速走行中」の状態を追加しました。
-
-
 :imagesdir: models/images
 
 .Class diagram of the TrainSlowStop subsystem
