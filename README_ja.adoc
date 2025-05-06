@@ -254,7 +254,6 @@ $ ls -l app
 
 === システムを実行する
 
-
 .EV3 Train Systemの動作
 image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
 
@@ -290,21 +289,28 @@ NOTE: ごめんなさい。日本語のモデル図しかありません。
 
 `models` ディレクトリに Astah* で作成したUMLモデルファイル `train_control_system.asta` があります。
 
-下記はそのモデルファイルからの抜粋です。
-
 :imagesdir: models/images
 
+
+このシステムのモデルは、次のような構造になっています。
+
+.システム全体のモデルの構造
+image::system_model_structure.png[{three-quarters-width}]
+
+
+下記はそのモデルファイルからの抜粋です。
+
 .Trainサブシステムのクラス図
-image::train_control_system/Train/Train_Subsystem.png[]
+image::train_control_system/Train/Train_Subsystem.png[{full-width}]
 
 .Trainクラスのrunメソッドのステートマシン図
-image::train_control_system/Train/Train/run/stm_Train__run.png[]
+image::train_control_system/Train/Train/run/stm_Train__run.png[{full-width}]
 
 .BlockSignalサブシステムのクラス図
-image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[]
+image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[{full-width}]
 
 .BlockSignalクラスのrunメソッドのステートマシン図
-image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[]
+image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[{full-width}]
 
 .Rotatorクラスのrunメソッドのステートマシン図
 image::train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png[{half-width}]
@@ -346,9 +352,9 @@ video::71gXzo7RDiw[youtube,{video-size}]
 :imagesdir: models/images
 
 .TrainSlowStopサブシステムのクラス図
-image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[]
+image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[{full-width}]
 
 .TrainSlowStopクラスのrunメソッドのステートマシン図
-image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[]
+image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[{full-width}]
 
 :imagesdir: images

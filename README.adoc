@@ -278,15 +278,22 @@ video::k168I_5-GNs[youtube,{video-size}]
 
 === System Design
 
-The system design model was created using Astah* Professional by Change Vision.
+The system design model was created using link:https://astah.change-vision.com/ja/product/astah-professional.html[Astah* Professional] by link:https://www.change-vision.com/[Change Vision Inc].
 
 NOTE: Sorry. The model diagram is only available in Japanese.
 
 The UML model file `train_control_system.asta` created with Astah* is in the `models` directory.
 
-The following is an excerpt from the model file.
 
 :imagesdir: models/images
+
+The following is a structure of the System.
+
+.Model structure of the System
+image::system_model_structure.png[{three-quarters-width}]
+
+
+The following is an excerpt from the model file.
 
 .Class diagram of the Train subsystem
 image::train_control_system/Train/Train_Subsystem.png[]
