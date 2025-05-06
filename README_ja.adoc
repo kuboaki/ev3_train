@@ -120,7 +120,7 @@ City Train用のモーターは、EV3と一緒に使うのは簡単ではあり�
 
 === 信号機（Block Singal）
 
-信号機は、LEGO Mindstorms EV3とその他のLEGO のパーツを組み合わせて製作しました。
+信号機は、LEGO Mindstorms EV3とその他のLEGO Technic のパーツを組み合わせて製作しました。
 
 この信号機は、閉塞信号機と呼ばれているものを模しています。
 
@@ -319,18 +319,19 @@ image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run
 `ev3_train` ディレクトリで、 `train_slow_stop` のプログラムをビルドします。
 この列車は、信号機の前にある警告表示を認識したら徐行します。
 
-```shell
+[source,console]
+----
 $ cd ev3_train
 $ pwd
 {インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=train_slow_stop
 $ ls -l app
 -rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app
-```
+----
 
 この `app` ファイルを、列車のEV3に転送します。
 
-NOTE: 転送するときに別の名前にしておけば、最初のプログラムと併存できます。
+NOTE: 前のプログラムと併存するには、転送するときに別の名前にしておきます。
 
 転送できたら、走らせてみましょう。
 
