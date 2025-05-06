@@ -1,3 +1,3 @@
-# Railroad Crossing Model
+# Train Control System Model
 
-For STAMP/STPA Simulation.
+make with Astah* Professional.

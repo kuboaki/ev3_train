@@ -1,5 +1,6 @@
 :encoding: utf-8
 :lang: en
+:doctype: article
 // :scripts: cjk
 include::image_size_matter.adoc[]
 include::attributes.adoc[]
@@ -14,14 +15,13 @@ include::attributes.adoc[]
 :sourcesdir: codes
 // :icons: fonts
 :hide-uri-scheme!:
-:figure-caption: 図
-:example-caption: リスト
-:table-caption: 表
-:appendix-caption: 付録
+//:figure-caption: 図
+//:example-caption: リスト
+//:table-caption: 表
+//:appendix-caption: 付録
 :xrefstyle: short
 :section-refsig:
 :chapter-refsig:
-
 
 [English](README.html) | [日本語](README_ja.html)
 

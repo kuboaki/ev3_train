@@ -1,0 +1,353 @@
+:encoding: utf-8
+:lang: ja
+:scripts: cjk
+:doctype: article
+:twoinches: width='360'
+:full-width: width='100%'
+:extra-width: width='120%'
+:three-quarters-width: width='75%'
+:half-width: width='50%'
+:half-size:
+:one-third-width: width='30%'
+:one-quarter-width: width='25%'
+:thumbnail: width='60'
+:icon: width='30'
+:video-size: width='640',height='360'
+ifeval::["{lang}" == "ja"]
+:appendix-caption: 付録
+:caution-caption: 注意
+:example-caption: 例
+:figure-caption: 図
+:important-caption: 重要
+:last-update-label: 最終更新
+:listing-caption: リスト
+:manname-title: 名前
+:note-caption: 注記
+//:preface-title: まえがき
+:table-caption: 表
+:tip-caption: ヒント
+:toc-title: 目次
+:untitled-label: 無題
+:version-label: バージョン
+:warning-caption: 警告
+endif::[]
+:linkcss:
+:stylesdir: css
+:stylesheet: mystyle.css
+:sectanchors:
+:autofit-option:
+:support-uri:
+:original-support-uri:
+:imagesdir: images
+:sourcesdir: codes
+// :icons: fonts
+:hide-uri-scheme!:
+:figure-caption: 図
+:example-caption: リスト
+:table-caption: 表
+:appendix-caption: 付録
+:xrefstyle: short
+:section-refsig:
+:chapter-refsig:
+
+link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
+
+
+:sectlink:
+== EV3を使ったLEGOの列車と信号機の製作
+
+このリポジトリは、LEGO City Trainのレールを走る列車（機関車）と、列車の運行を制御するための信号機などについて、LEGOブロックの組立図や、EV3を使って動かすプログラムを提供します。
+
+=== 製作の動機
+
+電車の制御では、電灯を使った信号機が普及するまで、出発または停止を示す標識板を動かして信号に使っていました。
+
+例えば、次の動画の冒頭で、標識板を使った信号が紹介されています。
+
+* The Signal Engineers - 1962 - Electrical Engineering on the Railway
+
+下記のサムネイルをクリックすると、昔の信号機を紹介している部分を再生します。
+
+.The Signal Engineers - 1962 - Electrical Engineering on the Railway
+video::jTkf5dL1AwU[youtube,start=81,{video-size}]
+
+自分の手元で、列車を動かしながら、信号機を使って列車を制御できたら面白いですよね。
+そこで、この動画のような古い信号を真似た信号機を作ってみることにしました。
+
+=== システムの全体像
+
+このシステムには、2つのアクターが登場します。
+
+* 列車（実のところ機関車だけです…）
+* 閉塞信号機（信号表示部と列車通過監視部）
+
+.システムの全体像
+image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width}]
+
+
+=== 列車（実は機関車だけですが…）
+
+列車は、LEGO Mindstorms EV3のキットとLEGO City Train のパーツを使って製作しました。
+
+.EV3とCity Trainのパーツで製作した列車（機関車）
+image::train_01_w_cables_w_memo.png[{three-quarters-width}]
+
+==== 走行ユニット（Drive Unit）
+
+走行ユニットは、列車が線路に沿って走行する働きを提供しています。
+
+.使用しているデバイス
+* M-Motor(Medium Motor): 車輪の回転用
+
+City Train用のモーターは、EV3と一緒に使うのは簡単ではありません。
+また、EV3RT（このプロジェクトで使用する開発環境）は City Train モーターをサポートしていません。
+以上の理由から、私は、EV3キットのMモーターを使用しています。
+
+==== 信号読み取り器（Signal Reader）
+
+この列車には運転手がいないので、カラーセンサーを使った信号読み取り器が、運転手の代わりに信号を読み取ります。
+
+.使用しているデバイス
+* Color Sensor: 信号の読取り用
+
+==== 操作ボタン（Operation Button）
+
+列車は、操作ボタンの操作によって、列車の進行・停止の指示を受け付けます。
+操作ボタンにはタッチセンサーを使っています。
+
+.使用しているデバイス
+* Touch Sensor: 列車にの進行・停止の指示の受け付け用
+
+=== 信号機（Block Singal）
+
+信号機は、LEGO Mindstorms EV3とその他のLEGO のパーツを組み合わせて製作しました。
+
+この信号機は、閉塞信号機と呼ばれているものを模しています。
+
+安全のために、この信号から先の区間に列車を通した後は、信号から先の区間から列車がいなくなるまで、他の列車が入れないよう信号の現示を「停止」にします。
+このように、信号で区切られた区間には1つの列車だけが走るようにする運行制御方式を「閉塞制御」といいます。ある信号とその次の信号の間を「閉塞区間」といいます。
+
+この信号機は、信号表示部、手動スイッチ、列車通過監視部で構成してあります。
+
+.EV3とLEGO Technicのパーツで製作した信号機
+image::block_signal_05_w_cables.png[{three-quarters-width}]
+
+
+==== 信号表示部（Signal Display Unit）
+
+信号表示部は、パレットを回転させて信号の表示を切り替える機構を提供しています。
+信号を切り替える機構には、L-モーターとタッチセンサーとカラーセンサーを使っています。
+
+.使用しているデバイス
+* L-Motor(Large Motor): 信号表示用のパレットの回転用
+* Touch Sensor: 信号表示モーターの回転の監視用
+* Color Sensor: 現在表示中の信号の読み取り器
+
+NOTE: 表示中の信号を読み取るためのブロックには、ステッカーを貼っています。色はLEGOブロックの青と黄色に似せています。
+
+==== 手動スイッチ（Manual Switch）
+
+手動スイッチは、手動で信号を切り替えるのに使います。
+手動スイッチにはタッチセンサーを使っています。
+
+.使用しているデバイス
+* Touch Sensor: 手動で信号を切り替える
+
+また、プログラムによって信号を切り替えることもできます。この方法は、列車の通過によって信号を切り替えるとき利用しています。
+EV3はBluetooth通信が使えるので、信号の切り替えに無線の指示も使えますが、このリポジトリのデモではこの機能を使ったデモは提供していません。
+
+==== 列車通過監視部（Train Detector）
+
+列車通過監視部は、列車の通過を監視します。
+列車通過監視部には、超音波センサーを使っています。
+
+.使用しているデバイス
+* Ultrasonic Sensor: 列車の通過を監視する
+
+.超音波センサーとLEGO Technicのパーツで製作した列車通過監視部
+image::train_detector_02.png[{half-width}]
+
+
+== 組立図
+
+このリポジトリの `images` ディレクトリに、Bricklink Studioで作成した列車や信号機の `.io` ファイルがあります。
+これらを参照すれば、組み立てに必要な部品や、組み立て方がわかるでしょう。
+
+Bricklink Studio download pange:: https://www.bricklink.com/v3/studio/download.page[]
+
+== 開発環境
+
+開発にはTOPPERS/EV3RT(Real-Time platform for EV3) を使っています。
+使用しているEV3RTのバージョンは「1.1-release」です。
+これより古い環境で動かすには、既存のコードに調整が必要です（1.1に更新したほうがよいでしょう）。
+
+EV3RT on TOPPERS:: https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT[]
+
+
+開発に使っているプログラミング言語はCです。
+もちろん、EV3をサポートしている他のプログラミング言語も利用できるでしょう。
+
+
+// NOTE: hakoniwa-ros2sim環境でシミュレーションする場合は、link:hakoniwa-ros2sim_simulation.md[シミュレーションの方法] を参照してください。
+
+
+=== コンテンツの構造
+
+
+[source,conole]
+----
+├─ images: LEGO Studio, Blender, png, etc.
+├─ models: System Design Model(UML)
+├─ block_signal: codes for block signal
+├─ train_slow_stop: codes for train slow down stop
+└─ train: codes for train
+----
+
+=== プログラムをビルドする
+
+==== リポジトリをEV3RTのワークスペースに展開する
+
+EV3RTをインストールしたディレクトリには、ビルド用のワークスペース `workspace` があります。
+その並びに `ev3_train` をclone します。
+
+[source,console]
+----
+$ cd {インストール場所}/ev3rt-1.1-release/hrp3/sdk
+$ git clone https://github.com/kuboaki/ev3_train.git
+$ ls -1
+workspace
+ev3_train
+----
+
+==== 列車のプログラムをビルドする
+
+`ev3_train` ディレクトリに移動して、列車のプログラムをビルドします。
+
+[source,console]
+----
+$ cd ev3_train
+$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102204  8  9 17:48 app
+----
+
+この `app` ファイルを、列車のEV3に転送します。
+転送方法は、EV3RTのWebサイトを参照してください。
+
+==== 信号機のプログラムをビルドする
+
+同じく、`ev3_train` ディレクトリで、信号機のプログラムをビルドします。
+
+[source,console]
+----
+$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=block_signal
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  104932  8  9 17:49 app
+----
+
+ビルドした `app` ファイルを、信号機のEV3に転送します。
+転送方法は、EV3RTのWebサイトを参照してください。
+
+=== システムを実行する
+
+
+.EV3 Train Systemの動作
+image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
+
+==== 列車を走行する
+
+. 転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。
+. 起動すると、警告音が鳴り、走行指示待ちになります。
+. 列車を線路の上に置き、車輪をレールに載せます。
+. 運転ボタンを押すと、確認音が鳴り、走行します。
+. 信号読取り部（上向きに装備したカラーセンサー）が、停止信号（赤）を読み取ると、到着音が鳴り、停止します。
+. 信号読取り部が、進行信号（緑）を読み取ると、確認音が鳴り、走行を再開します。
+. 運転ボタンを押すと、運転終了状態で停止します。
+
+==== 信号機を操作する
+
+. 転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。
+. 起動すると、確認音が鳴り、モーターが回転して準備動作に入ります。
+. 停止信号（赤が下向き）を現示すると、モーターが停止します。
+. 列車が信号まで来ると、停止信号を読み取って停車します。
+. 手動スイッチを押すと、モーターが回転して、信号機が進行信号（線路側が緑）を現示します。
+. 列車通過監視部（線路脇に設置した超音波センサー）が走行した列車を認識すると、信号機が停止信号に変わります。
+
+下記のサムネイルをクリックすると、列車と信号機が動作している様子を再生します。
+
+.列車と信号機が動作している様子
+video::k168I_5-GNs[youtube,{video-size}]
+
+=== システムの設計
+
+システムの設計モデルは、link:https://www.change-vision.com/[Change Vision社] の「 link:https://astah.change-vision.com/ja/product/astah-professional.html[Astah* Professional] 」で作成しました。
+
+NOTE: ごめんなさい。日本語のモデル図しかありません。
+
+`models` ディレクトリに Astah* で作成したUMLモデルファイル `train_control_system.asta` があります。
+
+下記はそのモデルファイルからの抜粋です。
+
+:imagesdir: models/images
+
+.Trainサブシステムのクラス図
+image::train_control_system/Train/Train_Subsystem.png[]
+
+.Trainクラスのrunメソッドのステートマシン図
+image::train_control_system/Train/Train/run/stm_Train__run.png[]
+
+.BlockSignalサブシステムのクラス図
+image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[]
+
+.BlockSignalクラスのrunメソッドのステートマシン図
+image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[]
+
+.Rotatorクラスのrunメソッドのステートマシン図
+image::train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png[{half-width}]
+
+.SignalDisplayクラスのrunメソッドのステートマシン図
+image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png[{half-width}]
+
+:imagesdir: images
+
+=== 信号機前で徐行する列車の運転
+
+`ev3_train` ディレクトリで、 `train_slow_stop` のプログラムをビルドします。
+この列車は、信号機の前にある警告表示を認識したら徐行します。
+
+```shell
+$ cd ev3_train
+$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train_slow_stop
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app
+```
+
+この `app` ファイルを、列車のEV3に転送します。
+
+NOTE: 転送するときに別の名前にしておけば、最初のプログラムと併存できます。
+
+転送できたら、走らせてみましょう。
+
+下記のサムネイルをクリックすると、列車が信号の手前で徐行している様子を再生します。
+
+.列車が信号の手前で徐行している様子
+video::71gXzo7RDiw[youtube,{video-size}]
+
+列車のステートマシン図には「減速走行中」の状態を追加しました。
+
+
+:imagesdir: models/images
+
+.TrainSlowStopサブシステムのクラス図
+image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[]
+
+.TrainSlowStopクラスのrunメソッドのステートマシン図
+image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[]
+
+:imagesdir: images
