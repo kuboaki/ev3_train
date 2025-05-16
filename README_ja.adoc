@@ -68,8 +68,16 @@ link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
 
 下記のサムネイルをクリックすると、昔の信号機を紹介している部分を再生します。
 
+ifdef::env-github[]
+.The Signal Engineers - 1962 - Electrical Engineering on the Railway
+image::https://img.youtube.com/vi/rAteGra5-xM/maxresdefault.jpg[link=https://youtu.be/jTkf5dL1AwU]
+endif::[]
+
+ifndef::env-github[]
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
 video::jTkf5dL1AwU[youtube,start=81,{video-size}]
+endif::[]
+
 
 自分の手元で、列車を動かしながら、信号機を使って列車を制御できたら面白いですよね。
 そこで、この動画のような古い信号を真似た信号機を作ってみることにしました。
