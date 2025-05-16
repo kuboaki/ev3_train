@@ -70,10 +70,7 @@ link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
 
 ifdef::env-github[]
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
-image::https://img.youtube.com/vi/jTkf5dL1AwU/maxresdefault.jpg[link=https://youtu.be/jTkf5dL1AwU]
-
-image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[]
-
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/jTkf5dL1AwU]
 endif::[]
 
 ifndef::env-github[]
