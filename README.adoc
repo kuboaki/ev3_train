@@ -68,7 +68,7 @@ Click the thumbnail below to play the part that introduces old signals.
 
 ifdef::env-github[]
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
-image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/jTkf5dL1AwU]
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/jTkf5dL1AwU?t=81]
 endif::[]
 
 ifndef::env-github[]
