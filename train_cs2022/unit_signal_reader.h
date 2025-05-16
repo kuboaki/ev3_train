@@ -1,6 +1,7 @@
 #ifndef UNIT_SIGNAL_READER_H_
 #define UNIT_SIGNAL_READER_H_
 #include "ev3api.h"
+#include "stdbool.h"
 
 // 信号の種類
 // 当座は進行と停止だけ

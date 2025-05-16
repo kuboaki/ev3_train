@@ -5,6 +5,7 @@
 #include "stdbool.h"
 
 #include "util.h"
+#include "unit_timer.h"
 #include "unit_horn.h"
 #include "unit_drive_unit.h"
 #include "unit_signal_reader.h"

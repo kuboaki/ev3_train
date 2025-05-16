@@ -1,6 +1,6 @@
 mkfile_path := $(dir $(lastword $(MAKEFILE_LIST)))
 
-APPL_COBJS += util.o timer.o horn.o drive_unit.o signal_reader.o operation_switch.o train.o
+APPL_COBJS += util.o timer.o horn.o drive_unit.o signal_reader.o operation_switch.o train_slow_stop.o
 
 SRCLANG := c
 

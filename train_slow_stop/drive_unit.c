@@ -4,7 +4,6 @@
 
 #include "drive_unit.h"
 
-#define DRIVE_UNIT_POWER 40
 static int drive_unit_power = DRIVE_UNIT_POWER;
 
 static const motor_port_t drive_unit_motor_port = EV3_PORT_A;

@@ -12,7 +12,7 @@
 #include "drive_unit.h"
 #include "signal_reader.h"
 #include "operation_switch.h"
-#inclide "status_indicator.h"
+#include "status_indicator.h"
 
 extern void train_init(void);
 extern void train_run(void);

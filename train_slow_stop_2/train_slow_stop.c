@@ -66,7 +66,7 @@ void train_run(void) {
         break;
     case TR_WAIT_FOR_DEPARTURE1:
         ENTRY
-            ev3_led_set_color(LED_ORANGE);
+            status_indicator_indicate(SI_STAND_BY);
             horn_warning();
         DO
         EVTCHK(operation_switch_is_pushed(),TR_WAIT_FOR_DEPARTURE2)
@@ -82,7 +82,7 @@ void train_run(void) {
         break;
     case TR_FORWARDING:
         ENTRY
-            ev3_led_set_color(LED_GREEN);
+            status_indicator_indicate(SI_NORMAL_FORWADING);
             horn_confirmation();
             drive_unit_set_power(DRIVE_UNIT_POWER);
             drive_unit_forward();
@@ -95,7 +95,7 @@ void train_run(void) {
         break;
     case TR_SLOW_DOWN:
         ENTRY
-            ev3_led_set_color(LED_ORANGE);
+            status_indicator_indicate(SI_SLOW_FORWARDING);
             drive_unit_set_power(DRIVE_UNIT_SLOW_POWER);
             drive_unit_forward();
             horn_warning();
@@ -109,7 +109,7 @@ void train_run(void) {
     case TR_STOP:
         ENTRY
             drive_unit_stop();
-            ev3_led_set_color(LED_RED);
+            status_indicator_indicate(SI_STOPPING);
             horn_arrived();
         DO
         EVTCHK(train_signal_is_departure(),TR_FORWARDING)
@@ -120,7 +120,7 @@ void train_run(void) {
     case TR_EXIT:
         ENTRY
             drive_unit_stop();
-            ev3_led_set_color(LED_ORANGE);
+            status_indicator_indicate(SI_OPERATION_END);
             horn_warning();
         DO
         EXIT

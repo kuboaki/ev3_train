@@ -23,6 +23,9 @@ signal_type_t signal_reader_get_signal(void) {
     case COLOR_GREEN:
         signal = SIGNAL_DEPARTURE;
         break;
+    case COLOR_YELLOW:
+        signal = SIGNAL_REDUCE;
+        break;
     default:
         color = COLOR_NONE;
         signal = SIGNAL_NONE;

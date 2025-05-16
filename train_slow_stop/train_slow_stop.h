@@ -1,7 +1,7 @@
-#ifndef TRAIN_H_
-#define TRAIN_H_
+#ifndef TRAIN_SLOW_STOP_H_
+#define TRAIN_SLOW_STOP_H_
 //
-// train.h
+// train_slow_stop.h
 //
 
 #include "ev3api.h"
@@ -16,4 +16,4 @@
 extern void train_init(void);
 extern void train_run(void);
 
-#endif // TRAIN_H_
+#endif // TRAIN_SLOW_STOP_H_
