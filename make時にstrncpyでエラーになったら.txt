@@ -1,0 +1,20 @@
+make app=train すると、次のエラーでビルドが止まる。
+
+../common/ev3api/src/ev3api_fs.c: In function 'ev3_sdcard_readdir':
+../common/ev3api/src/ev3api_fs.c:143:2: warning: 'strncpy' output may be truncated copying 255 bytes from a string of length 255 [-Wstringop-truncation]
+  143 |  strncpy(fileinfo->name, nfo.fname, TMAX_FILENAME_LEN);
+      |  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make[1]: Leaving directory '/Users/kuboaki/Documents/ev3rt-mac/ev3rt-1.1-release/hrp3/sdk/OBJ'
+make: *** [../common/Makefile.workspace:97: app] Error 2
+
+原因は、上記コードが、文字列の'\0'終端を担保しないで、バッファサイズのMaxまでコピーしていること。
+つまり、255文字目まで '\0'文字以外の文字が続くと、文字列終端の'\0'がないままになる。
+
+ev3api_fs.c を修正するなら、下記のように、
+ev3_sdcard_readdirで取得したディレクトリエントリ（nfoに格納）のfnameの文字列長でコピーする。
+
+strncpy(fileinfo->name, nfo.fname,sizeof(nfo.fname)); // TMAX_FILENAME_LEN);
+
+そうではなく、コンパイルオプションでこのエラーを抑制したいなら、
+makeでgccのオプションに-Wno-stringop-overflow を追加する。
+ただし、この場合他の箇所でもおなじことがあってもエラーが抑制されるので注意。
