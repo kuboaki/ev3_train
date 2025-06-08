@@ -281,7 +281,16 @@ image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
 . When the train passage monitor (ultrasonic sensor installed beside the track) detects a passing train, the block signal will change to a stop signal.
 
 Click the thumbnail below to play the train and the block signal.
+
+ifdef::env-github[]
+.train and block signal
+image::http://img.youtube.com/vi/k168I_5-GNs/sddefault.jpg[link=https://youtu.be/k168I_5-GNs/]
+endif::[]
+
+ifndef::env-github[]
+.train and block signal
 video::k168I_5-GNs[youtube,{video-size}]
+endif::[]
 
 === System Design
 
@@ -322,14 +331,14 @@ image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run
 
 :imagesdir: images
 
-=== Trains moving slowly just before a Block Signal
+=== Train slows down at the Yellow Signal
 
 In the `ev3_train` directory, build the `train_slow_stop` program.
 This train will slow down when it recognizes the warning sign in front of the signal.
 
 [source,console]
 ----
-$ cd ev3_train
+
 $ pwd
 {EV3RT installed location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
 $ make app=train_slow_stop
@@ -345,8 +354,16 @@ Once the transfer is complete, let's try running the train.
 
 Click on the thumbnail below to play the video of the train slowing down in front of the signal.
 
-.Train slowing down in front of a signal
+
+ifdef::env-github[]
+.Train slows down at the yellow signal
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://studio.youtube.com/video/71gXzo7RDiw/]
+endif::[]
+
+ifndef::env-github[]
+.Train slows down at the yellow signal
 video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
 
 I added a "slow down" state to the train's state machine diagram.
 
