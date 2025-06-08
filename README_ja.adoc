@@ -316,9 +316,7 @@ NOTE: ごめんなさい。日本語のモデル図しかありません。
 
 `models` ディレクトリに Astah* で作成したUMLモデルファイル `train_control_system.asta` があります。
 
-// below change is not available on Asciidoctor.js Live Preview
 :imagesdir: models/images
-
 
 このシステムのモデルは、次のような構造になっています。
 

@@ -300,7 +300,6 @@ NOTE: Sorry. The model diagrams are only available in Japanese.
 
 The UML model file `train_control_system.asta` created with Astah* is in the `models` directory.
 
-// below change is not available on Asciidoctor.js Live Preview
 :imagesdir: models/images
 
 The following is a structure of the System.
