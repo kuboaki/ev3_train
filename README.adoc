@@ -296,7 +296,7 @@ endif::[]
 
 The system design model was created using link:https://astah.change-vision.com/ja/product/astah-professional.html[Astah* Professional] by link:https://www.change-vision.com/[Change Vision Inc].
 
-NOTE: Sorry. The model diagram is only available in Japanese.
+NOTE: Sorry. The model diagrams are only available in Japanese.
 
 The UML model file `train_control_system.asta` created with Astah* is in the `models` directory.
 
@@ -312,22 +312,22 @@ image::system_model_structure.png[{three-quarters-width}]
 The following is an excerpt from the model file.
 
 .Class diagram of the Train subsystem
-image::train_control_system/Train/Train_Subsystem.png[]
+image::train_control_system/Train/Train_Subsystem.png[{full-width}]
 
 .State machine diagram of the run method of the Train class
-image::train_control_system/Train/Train/run/stm_Train__run.png[]
+image::train_control_system/Train/Train/run/stm_Train__run.png[{full-width}]
 
 .Class diagram of the BlockSignal subsystem
-image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[]
+image::train_control_system/BlockSignal/BlockSignal_Subsystem.png[{full-width}]
 
 .State machine diagram of the run method of the BlockSignal class
-image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[]
+image::train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png[{full-width}]
 
 .State machine diagram of the run method of the Rotator class
-image::train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png[{half-width}]
+image::train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png[{fullf-width}]
 
 .State machine diagram of the run method of the SignalDisplay class
-image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png[{half-width}]
+image::train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png[{full-width}]
 
 :imagesdir: images
 
