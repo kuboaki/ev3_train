@@ -257,6 +257,12 @@ For instructions on how to transfer, see the EV3RT website.
 
 === Running the System
 
+The system in action is demonstrated in the following YouTube videos.
+
+==== Stop and Go
+
+==== Slow Down at Yellow Signal
+
 .EV3 Train System in action
 image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
 
@@ -373,5 +379,50 @@ image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[]
 
 .State machine diagram of the run method of the TrainSlowStop class
 image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[]
+
+:imagesdir: images
+
+=== Train slows down at the Yellow Signal (Part 2)
+
+In the `ev3_train` directory, build the `train_slow_stop_2` program.
+This train will slow down when it recognizes the warning sign in front of the signal.
+
+[source,console]
+----
+$ cd ev3_train
+$ pwd
+{installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train_slow_stop_2
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app
+----
+
+Transfer this `app` file to the Trains' EV3.
+
+NOTE: To allow it to coexist with the previous program, give it a different name when transferring.
+
+Once the transfer is complete, let's try running the train.
+
+Click on the thumbnail below to play the video of the train slowing down in front of the signal.
+
+ifdef::env-github[]
+.Train slows down at the yellow signal
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+endif::[]
+
+ifndef::env-github[]
+.Train slows down at the yellow signal
+video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
+
+I added a "slow down" state to the train's state machine diagram.
+
+:imagesdir: models/images
+
+.Class diagram of the TrainSlowStop subsystem
+image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[{full-width}]
+
+.State machine diagram of the run method of the TrainSlowStop class
+image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[{full-width}]
 
 :imagesdir: images
