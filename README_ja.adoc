@@ -371,7 +371,7 @@ NOTE: 前のプログラムと併存するには、転送するときに別の�
 
 ifdef::env-github[]
 .列車が信号の手前で徐行している様子
-image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://studio.youtube.com/video/71gXzo7RDiw/]
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
 endif::[]
 
 ifndef::env-github[]

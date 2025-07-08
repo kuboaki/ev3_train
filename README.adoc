@@ -356,7 +356,7 @@ Click on the thumbnail below to play the video of the train slowing down in fron
 
 ifdef::env-github[]
 .Train slows down at the yellow signal
-image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://studio.youtube.com/video/71gXzo7RDiw/]
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
 endif::[]
 
 ifndef::env-github[]
