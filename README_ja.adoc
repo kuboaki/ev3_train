@@ -138,7 +138,7 @@ City Train用のモーターは、EV3と一緒に使うのは簡単ではあり�
 .使用しているデバイス
 * Touch Sensor: 列車にの進行・停止の指示の受け付け用
 
-=== 信号機（Block Singal）
+=== 信号機（Block Signal）
 
 信号機は、LEGO Mindstorms EV3とその他のLEGO Technic のパーツを組み合わせて製作しました。
 
