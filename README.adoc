@@ -275,7 +275,7 @@ endif::[]
 
 ifdef::env-github[]
 .Slow Down at Yellow Signal
-image::http://img.youtube.com/vi/71gXzo7RDiw/maxresdefault.jpg[link=https://youtu.be/71gXzo7RDiw,{three-quarters-width}]
+image::http://img.youtube.com/vi/71gXzo7RDiw/mqdefault.jpg[link=https://youtu.be/71gXzo7RDiw,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
