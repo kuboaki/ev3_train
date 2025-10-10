@@ -98,11 +98,32 @@ image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width
 
 ==== 停止と進行
 
+停止現示と進行現示を使っています（この実行例は徐行現示を使っていません）。
+
+ifdef::env-github[]
+.停止と進行の動作
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/k168I_5-GNs]
+endif::[]
+
+ifndef::env-github[]
+.停止と進行の動作
+video::k168I_5-GNs[youtube,{video-size}]
+endif::[]
+
 
 ==== 黄色で徐行
 
 徐行現示（黄色信号）で徐行してから停止します。
 
+ifdef::env-github[]
+.黄色で徐行の動作
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+endif::[]
+
+ifndef::env-github[]
+.黄色で徐行の動作
+video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
 
 
 === 列車（実は機関車だけですが…）
