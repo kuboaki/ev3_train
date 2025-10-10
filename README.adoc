@@ -261,7 +261,28 @@ The system in action is demonstrated in the following YouTube videos.
 
 ==== Stop and Go
 
+ifdef::env-github[]
+.Stop and Go
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/k168I_5-GNs]
+endif::[]
+
+ifndef::env-github[]
+.Stop and Go
+video::k168I_5-GNs[youtube,{video-size}]
+endif::[]
+
 ==== Slow Down at Yellow Signal
+
+ifdef::env-github[]
+.Slow Down at Yellow Signal
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+endif::[]
+
+ifndef::env-github[]
+.Slow Down at Yellow Signal
+video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
+
 
 .EV3 Train System in action
 image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
