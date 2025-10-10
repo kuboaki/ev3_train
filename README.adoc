@@ -263,7 +263,7 @@ The system in action is demonstrated in the following YouTube videos.
 
 ifdef::env-github[]
 .Stop and Go
-image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs]
+image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
@@ -275,7 +275,7 @@ endif::[]
 
 ifdef::env-github[]
 .Slow Down at Yellow Signal
-image::http://img.youtube.com/vi/71gXzo7RDiw/maxresdefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+image::http://img.youtube.com/vi/71gXzo7RDiw/maxresdefault.jpg[link=https://youtu.be/71gXzo7RDiw,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
