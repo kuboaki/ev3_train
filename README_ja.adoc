@@ -70,7 +70,7 @@ link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
 
 ifdef::env-github[]
 .The Signal Engineers - 1962 - Electrical Engineering on the Railway
-image::http://img.youtube.com/vi/jTkf5dL1AwU/maxresdefault.jpg[link=https://youtu.be/jTkf5dL1AwU?t=81,{three-quarters-width}]]
+image::http://img.youtube.com/vi/jTkf5dL1AwU/maxresdefault.jpg[link=https://youtu.be/jTkf5dL1AwU?t=81,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
@@ -96,32 +96,32 @@ image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width
 
 システムが動作する様子は、YouTubeに動画をアップしてあります。
 
-==== 停止と進行
+==== 前進と前進
 
-停止現示と進行現示を使っています（この実行例は徐行現示を使っていません）。
+前進して、停止現示（赤信号）で停止しているところです（徐行していない場合）。
 
 ifdef::env-github[]
-.停止と進行の動作
+.進行と前進
 image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
-.停止と進行の動作
+.進行と前進
 video::k168I_5-GNs[youtube,{video-size}]
 endif::[]
 
+==== 減速現示で徐行
 
-==== 黄色で徐行
-
-徐行現示（黄色信号）で徐行してから停止します。
+減速現示（黄色信号）を通過したら、徐行してから停止します。
+この動作は、後の節で実装します。
 
 ifdef::env-github[]
-.黄色で徐行の動作
+.減速現示で徐行
 image::http://img.youtube.com/vi/71gXzo7RDiw/mqdefault.jpg[link=https://youtu.be/71gXzo7RDiw,{three-quarters-width}]
 endif::[]
 
 ifndef::env-github[]
-.黄色で徐行の動作
+.減速現示で徐行
 video::71gXzo7RDiw[youtube,{video-size}]
 endif::[]
 
