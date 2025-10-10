@@ -50,6 +50,7 @@ endif::[]
 
 link:README.adoc[English]&nbsp;|&nbsp;link:README_ja.adoc[Japanese]
 
+:sectlink:
 == Building a LEGO Train and Signal Using EV3
 
 This repository provides build instructions for LEGO brick train that run on LEGO City Train tracks, as well as system design diagrams and programs using EV3 to control signals and manage train operation.
@@ -88,6 +89,42 @@ This system consists of two main actors:
 
 .System Overview
 image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width}]
+
+=== System in Action
+
+The system's operation is demonstrated in videos uploaded to YouTube.
+
+
+==== Forwarding and Stop
+
+The train is forwarding, and will stop at the **Stop Aspect** (Red signal). (This scene does not include a reducing Slowdown.)
+
+ifdef::env-github[]
+.Forwarding and Stop
+image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs,{three-quarters-width}]
+endif::[]
+
+ifndef::env-github[]
+.Forwarding and Stop
+video::k168I_5-GNs[youtube,{video-size}]
+endif::[]
+
+
+==== Slowdown and Stop
+
+When the train pass a **Reduce Aspect** (yellow light), slow down and then stop.
+**This will be implemented in a later section.**
+
+ifdef::env-github[]
+.Slowdown under Reduce Aspect
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+endif::[]
+
+ifndef::env-github[]
+.Slowdown under Reduce Aspect
+video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
+
 
 === Train (well, just a locomotive…)
 
@@ -257,35 +294,6 @@ For instructions on how to transfer, see the EV3RT website.
 
 === Running the System
 
-The system in action is demonstrated in the following YouTube videos.
-
-==== Stop and Go
-
-ifdef::env-github[]
-.Stop and Go
-image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs,{three-quarters-width}]
-endif::[]
-
-ifndef::env-github[]
-.Stop and Go
-video::k168I_5-GNs[youtube,{video-size}]
-endif::[]
-
-==== Slow Down at Yellow Signal
-
-ifdef::env-github[]
-.Slow Down at Yellow Signal
-image::http://img.youtube.com/vi/71gXzo7RDiw/mqdefault.jpg[link=https://youtu.be/71gXzo7RDiw,{three-quarters-width}]
-endif::[]
-
-ifndef::env-github[]
-.Slow Down at Yellow Signal
-video::71gXzo7RDiw[youtube,{video-size}]
-endif::[]
-
-=== Train
-
-
 .EV3 Train System in action
 image::train_control_system_w_yellow_signal_w_memo.png[{three-quarters-width}]
 
@@ -313,7 +321,7 @@ Click the thumbnail below to play the train and the block signal.
 
 ifdef::env-github[]
 .train and block signal
-image::http://img.youtube.com/vi/k168I_5-GNs/sddefault.jpg[link=https://youtu.be/k168I_5-GNs/]
+image::http://img.youtube.com/vi/k168I_5-GNs/maxresdefault.jpg[link=https://youtu.be/k168I_5-GNs/,{three-quarters-width}]]
 endif::[]
 
 ifndef::env-github[]
@@ -402,50 +410,5 @@ image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[]
 
 .State machine diagram of the run method of the TrainSlowStop class
 image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[]
-
-:imagesdir: images
-
-=== Train slows down at the Yellow Signal (Part 2)
-
-In the `ev3_train` directory, build the `train_slow_stop_2` program.
-This train will slow down when it recognizes the warning sign in front of the signal.
-
-[source,console]
-----
-$ cd ev3_train
-$ pwd
-{installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
-$ make app=train_slow_stop_2
-$ ls -l app
--rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app
-----
-
-Transfer this `app` file to the Trains' EV3.
-
-NOTE: To allow it to coexist with the previous program, give it a different name when transferring.
-
-Once the transfer is complete, let's try running the train.
-
-Click on the thumbnail below to play the video of the train slowing down in front of the signal.
-
-ifdef::env-github[]
-.Train slows down at the yellow signal
-image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
-endif::[]
-
-ifndef::env-github[]
-.Train slows down at the yellow signal
-video::71gXzo7RDiw[youtube,{video-size}]
-endif::[]
-
-I added a "slow down" state to the train's state machine diagram.
-
-:imagesdir: models/images
-
-.Class diagram of the TrainSlowStop subsystem
-image::train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png[{full-width}]
-
-.State machine diagram of the run method of the TrainSlowStop class
-image::train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png[{full-width}]
 
 :imagesdir: images
