@@ -98,11 +98,32 @@ image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width
 
 ==== 停止と進行
 
+停止現示と進行現示を使っています（この実行例は徐行現示を使っていません）。
+
+ifdef::env-github[]
+.停止と進行の動作
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/k168I_5-GNs]
+endif::[]
+
+ifndef::env-github[]
+.停止と進行の動作
+video::k168I_5-GNs[youtube,{video-size}]
+endif::[]
+
 
 ==== 黄色で徐行
 
 徐行現示（黄色信号）で徐行してから停止します。
 
+ifdef::env-github[]
+.黄色で徐行の動作
+image::http://img.youtube.com/vi/jTkf5dL1AwU/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
+endif::[]
+
+ifndef::env-github[]
+.黄色で徐行の動作
+video::71gXzo7RDiw[youtube,{video-size}]
+endif::[]
 
 
 === 列車（実は機関車だけですが…）
@@ -138,7 +159,7 @@ City Train用のモーターは、EV3と一緒に使うのは簡単ではあり�
 .使用しているデバイス
 * Touch Sensor: 列車にの進行・停止の指示の受け付け用
 
-=== 信号機（Block Singal）
+=== 信号機（Block Signal）
 
 信号機は、LEGO Mindstorms EV3とその他のLEGO Technic のパーツを組み合わせて製作しました。
 
@@ -371,7 +392,7 @@ NOTE: 前のプログラムと併存するには、転送するときに別の�
 
 ifdef::env-github[]
 .列車が信号の手前で徐行している様子
-image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://studio.youtube.com/video/71gXzo7RDiw/]
+image::http://img.youtube.com/vi/71gXzo7RDiw/sddefault.jpg[link=https://youtu.be/71gXzo7RDiw]
 endif::[]
 
 ifndef::env-github[]
