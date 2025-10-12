@@ -96,7 +96,7 @@ image::train_control_system_w_yellow_signal_w_cables_2.png[{three-quarters-width
 
 システムが動作する様子は、YouTubeに動画をアップしてあります。
 
-==== 前進と前進
+==== 前進と停止
 
 前進して、停止現示（赤信号）で停止しているところです（徐行していない場合）。
 
@@ -209,14 +209,14 @@ EV3はBluetooth通信が使えるので、信号の切り替えに無線の指�
 image::train_detector_02.png[{half-width}]
 
 
-== 組立図
+=== 組立図
 
 このリポジトリの `images` ディレクトリに、Bricklink Studioで作成した列車や信号機の `.io` ファイルがあります。
 これらを参照すれば、組み立てに必要な部品や、組み立て方がわかるでしょう。
 
 Bricklink Studio download pange:: https://www.bricklink.com/v3/studio/download.page[]
 
-== 開発環境
+=== 開発環境
 
 開発にはTOPPERS/EV3RT(Real-Time platform for EV3) を使っています。
 使用しているEV3RTのバージョンは「1.1-release」です。

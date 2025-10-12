@@ -208,7 +208,7 @@ The train detector uses an ultrasonic sensor.
 .Train detector made with ultrasonic sensors and LEGO Technic parts
 image::train_detector_02.png[{half-width}]
 
-== Build Instruction
+=== Build Instruction
 
 In the `images` directory of this repository, there are `.io` files of trains and signals created with Bricklink Studio.
 
@@ -216,7 +216,7 @@ By referring to these, you can see what parts are needed for assembly and how to
 
 Bricklink Studio download page:: https://www.bricklink.com/v3/studio/download.page[]
 
-== Development environment
+=== Development environment
 
 I use TOPPERS/EV3RT (Real-Time platform for EV3) for development.
 
