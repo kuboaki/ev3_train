@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>EV3を使ったLEGOの列車と信号機の製作</title>
+<link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph">
+<p><a href="README.adoc">English</a>&nbsp;|&nbsp;<a href="README_ja.adoc">Japanese</a></p>
+</div>
+<div class="sect1">
+<h2 id="_ev3を使ったlegoの列車と信号機の製作"><a class="anchor" href="#_ev3を使ったlegoの列車と信号機の製作"></a>EV3を使ったLEGOの列車と信号機の製作</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>このリポジトリは、LEGO City Trainのレールを走る列車（機関車）と、列車の運行を制御するための信号機などについて、LEGOブロックの組立図や、EV3を使って動かすプログラムを提供します。</p>
+</div>
+<div class="sect2">
+<h3 id="_製作の動機"><a class="anchor" href="#_製作の動機"></a>製作の動機</h3>
+<div class="paragraph">
+<p>電車の制御では、電灯を使った信号機が普及するまで、出発または停止を示す標識板を動かして信号に使っていました。</p>
+</div>
+<div class="paragraph">
+<p>例えば、次の動画の冒頭で、標識板を使った信号が紹介されています。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Signal Engineers - 1962 - Electrical Engineering on the Railway</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>下記のサムネイルをクリックすると、昔の信号機を紹介している部分を再生します。</p>
+</div>
+<div class="videoblock">
+<div class="title">The Signal Engineers - 1962 - Electrical Engineering on the Railway</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/jTkf5dL1AwU?rel=0&amp;start=81" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>自分の手元で、列車を動かしながら、信号機を使って列車を制御できたら面白いですよね。
+そこで、この動画のような古い信号を真似た信号機を作ってみることにしました。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_システムの全体像"><a class="anchor" href="#_システムの全体像"></a>システムの全体像</h3>
+<div class="paragraph">
+<p>このシステムには、2つのアクターが登場します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>列車（実のところ機関車だけです…）</p>
+</li>
+<li>
+<p>閉塞信号機（信号表示部と列車通過監視部）</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_control_system_w_yellow_signal_w_cables_2.png" alt="train control system w yellow signal w cables 2" width="75%">
+</div>
+<div class="title">図 1. システムの全体像</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_システムが動作する様子"><a class="anchor" href="#_システムが動作する様子"></a>システムが動作する様子</h3>
+<div class="paragraph">
+<p>システムが動作する様子は、YouTubeに動画をアップしてあります。</p>
+</div>
+<div class="sect3">
+<h4 id="_前進と停止"><a class="anchor" href="#_前進と停止"></a>前進と停止</h4>
+<div class="paragraph">
+<p>前進して、停止現示（赤信号）で停止しているところです（徐行していない場合）。</p>
+</div>
+<div class="videoblock">
+<div class="title">進行と前進</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/k168I_5-GNs?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_減速現示で徐行"><a class="anchor" href="#_減速現示で徐行"></a>減速現示で徐行</h4>
+<div class="paragraph">
+<p>減速現示（黄色信号）を通過したら、徐行してから停止します。
+この動作は、後の節で実装します。</p>
+</div>
+<div class="videoblock">
+<div class="title">減速現示で徐行</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/71gXzo7RDiw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_列車実は機関車だけですが"><a class="anchor" href="#_列車実は機関車だけですが"></a>列車（実は機関車だけですが…）</h3>
+<div class="paragraph">
+<p>列車は、LEGO Mindstorms EV3のキットとLEGO City Train のパーツを使って製作しました。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_01_w_cables_w_memo.png" alt="train 01 w cables w memo" width="75%">
+</div>
+<div class="title">図 2. EV3とCity Trainのパーツで製作した列車（機関車）</div>
+</div>
+<div class="sect3">
+<h4 id="_走行ユニットdrive_unit"><a class="anchor" href="#_走行ユニットdrive_unit"></a>走行ユニット（Drive Unit）</h4>
+<div class="paragraph">
+<p>走行ユニットは、列車が線路に沿って走行する働きを提供しています。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>M-Motor(Medium Motor): 車輪の回転用</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>City Train用のモーターは、EV3と一緒に使うのは簡単ではありません。
+また、EV3RT（このプロジェクトで使用する開発環境）は City Train モーターをサポートしていません。
+以上の理由から、私は、EV3キットのMモーターを使用しています。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_信号読み取り器signal_reader"><a class="anchor" href="#_信号読み取り器signal_reader"></a>信号読み取り器（Signal Reader）</h4>
+<div class="paragraph">
+<p>この列車には運転手がいないので、カラーセンサーを使った信号読み取り器が、運転手の代わりに信号を読み取ります。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>Color Sensor: 信号の読取り用</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_操作ボタンoperation_button"><a class="anchor" href="#_操作ボタンoperation_button"></a>操作ボタン（Operation Button）</h4>
+<div class="paragraph">
+<p>列車は、操作ボタンの操作によって、列車の進行・停止の指示を受け付けます。
+操作ボタンにはタッチセンサーを使っています。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>Touch Sensor: 列車にの進行・停止の指示の受け付け用</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_信号機block_signal"><a class="anchor" href="#_信号機block_signal"></a>信号機（Block Signal）</h3>
+<div class="paragraph">
+<p>信号機は、LEGO Mindstorms EV3とその他のLEGO Technic のパーツを組み合わせて製作しました。</p>
+</div>
+<div class="paragraph">
+<p>この信号機は、閉塞信号機と呼ばれているものを模しています。</p>
+</div>
+<div class="paragraph">
+<p>安全のために、この信号から先の区間に列車を通した後は、信号から先の区間から列車がいなくなるまで、他の列車が入れないよう信号の現示を「停止」にします。
+このように、信号で区切られた区間には1つの列車だけが走るようにする運行制御方式を「閉塞制御」といいます。ある信号とその次の信号の間を「閉塞区間」といいます。</p>
+</div>
+<div class="paragraph">
+<p>この信号機は、信号表示部、手動スイッチ、列車通過監視部で構成してあります。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/block_signal_05_w_cables.png" alt="block signal 05 w cables" width="75%">
+</div>
+<div class="title">図 3. EV3とLEGO Technicのパーツで製作した信号機</div>
+</div>
+<div class="sect3">
+<h4 id="_信号表示部signal_display_unit"><a class="anchor" href="#_信号表示部signal_display_unit"></a>信号表示部（Signal Display Unit）</h4>
+<div class="paragraph">
+<p>信号表示部は、パレットを回転させて信号の表示を切り替える機構を提供しています。
+信号を切り替える機構には、L-モーターとタッチセンサーとカラーセンサーを使っています。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>L-Motor(Large Motor): 信号表示用のパレットの回転用</p>
+</li>
+<li>
+<p>Touch Sensor: 信号表示モーターの回転の監視用</p>
+</li>
+<li>
+<p>Color Sensor: 現在表示中の信号の読み取り器</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">注記</div>
+</td>
+<td class="content">
+表示中の信号を読み取るためのブロックには、ステッカーを貼っています。色はLEGOブロックの青と黄色に似せています。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_手動スイッチmanual_switch"><a class="anchor" href="#_手動スイッチmanual_switch"></a>手動スイッチ（Manual Switch）</h4>
+<div class="paragraph">
+<p>手動スイッチは、手動で信号を切り替えるのに使います。
+手動スイッチにはタッチセンサーを使っています。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>Touch Sensor: 手動で信号を切り替える</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>また、プログラムによって信号を切り替えることもできます。この方法は、列車の通過によって信号を切り替えるとき利用しています。
+EV3はBluetooth通信が使えるので、信号の切り替えに無線の指示も使えますが、このリポジトリのデモではこの機能を使ったデモは提供していません。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_列車通過監視部train_detector"><a class="anchor" href="#_列車通過監視部train_detector"></a>列車通過監視部（Train Detector）</h4>
+<div class="paragraph">
+<p>列車通過監視部は、列車の通過を監視します。
+列車通過監視部には、超音波センサーを使っています。</p>
+</div>
+<div class="ulist">
+<div class="title">使用しているデバイス</div>
+<ul>
+<li>
+<p>Ultrasonic Sensor: 列車の通過を監視する</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_detector_02.png" alt="train detector 02" width="50%">
+</div>
+<div class="title">図 4. 超音波センサーとLEGO Technicのパーツで製作した列車通過監視部</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_組立図"><a class="anchor" href="#_組立図"></a>組立図</h3>
+<div class="paragraph">
+<p>このリポジトリの <code>images</code> ディレクトリに、Bricklink Studioで作成した列車や信号機の <code>.io</code> ファイルがあります。
+これらを参照すれば、組み立てに必要な部品や、組み立て方がわかるでしょう。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bricklink Studio download pange</dt>
+<dd>
+<p><a href="https://www.bricklink.com/v3/studio/download.page" class="bare">https://www.bricklink.com/v3/studio/download.page</a></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_開発環境"><a class="anchor" href="#_開発環境"></a>開発環境</h3>
+<div class="paragraph">
+<p>開発にはTOPPERS/EV3RT(Real-Time platform for EV3) を使っています。
+使用しているEV3RTのバージョンは「1.1-release」です。
+これより古い環境で動かすには、既存のコードに調整が必要です（1.1に更新したほうがよいでしょう）。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">EV3RT on TOPPERS</dt>
+<dd>
+<p><a href="https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT" class="bare">https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT</a></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>開発に使っているプログラミング言語はCです。
+もちろん、EV3をサポートしている他のプログラミング言語も利用できるでしょう。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_コンテンツの構造"><a class="anchor" href="#_コンテンツの構造"></a>コンテンツの構造</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-conole" data-lang="conole">├─ images: LEGO Studio, Blender, png, etc.
+├─ models: System Design Model(UML)
+├─ block_signal: codes for block signal
+├─ train_slow_stop: codes for train slow down stop
+└─ train: codes for train</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_プログラムをビルドする"><a class="anchor" href="#_プログラムをビルドする"></a>プログラムをビルドする</h3>
+<div class="sect3">
+<h4 id="_リポジトリをev3rtのワークスペースに展開する"><a class="anchor" href="#_リポジトリをev3rtのワークスペースに展開する"></a>リポジトリをEV3RTのワークスペースに展開する</h4>
+<div class="paragraph">
+<p>EV3RTをインストールしたディレクトリには、ビルド用のワークスペース <code>workspace</code> があります。
+その並びに <code>ev3_train</code> をclone します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ cd {インストール場所}/ev3rt-1.1-release/hrp3/sdk
+$ git clone https://github.com/kuboaki/ev3_train.git
+$ ls -1
+workspace
+ev3_train</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_列車のプログラムをビルドする"><a class="anchor" href="#_列車のプログラムをビルドする"></a>列車のプログラムをビルドする</h4>
+<div class="paragraph">
+<p><code>ev3_train</code> ディレクトリに移動して、列車のプログラムをビルドします。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ cd ev3_train
+$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102204  8  9 17:48 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>この <code>app</code> ファイルを、列車のEV3に転送します。
+転送方法は、EV3RTのWebサイトを参照してください。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_信号機のプログラムをビルドする"><a class="anchor" href="#_信号機のプログラムをビルドする"></a>信号機のプログラムをビルドする</h4>
+<div class="paragraph">
+<p>同じく、<code>ev3_train</code> ディレクトリで、信号機のプログラムをビルドします。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=block_signal
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  104932  8  9 17:49 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ビルドした <code>app</code> ファイルを、信号機のEV3に転送します。
+転送方法は、EV3RTのWebサイトを参照してください。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_システムを実行する"><a class="anchor" href="#_システムを実行する"></a>システムを実行する</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_control_system_w_yellow_signal_w_memo.png" alt="train control system w yellow signal w memo" width="75%">
+</div>
+<div class="title">図 5. EV3 Train Systemの動作</div>
+</div>
+<div class="sect3">
+<h4 id="_列車を走行する"><a class="anchor" href="#_列車を走行する"></a>列車を走行する</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。</p>
+</li>
+<li>
+<p>起動すると、警告音が鳴り、走行指示待ちになります。</p>
+</li>
+<li>
+<p>列車を線路の上に置き、車輪をレールに載せます。</p>
+</li>
+<li>
+<p>運転ボタンを押すと、確認音が鳴り、走行します。</p>
+</li>
+<li>
+<p>信号読取り部（上向きに装備したカラーセンサー）が、停止信号（赤）を読み取ると、到着音が鳴り、停止します。</p>
+</li>
+<li>
+<p>信号読取り部が、進行信号（緑）を読み取ると、確認音が鳴り、走行を再開します。</p>
+</li>
+<li>
+<p>運転ボタンを押すと、運転終了状態で停止します。</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_信号機を操作する"><a class="anchor" href="#_信号機を操作する"></a>信号機を操作する</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>転送したプログラムを起動します。起動方法はEV3RTのWebサイトを参照してください。</p>
+</li>
+<li>
+<p>起動すると、確認音が鳴り、モーターが回転して準備動作に入ります。</p>
+</li>
+<li>
+<p>停止信号（赤が下向き）を現示すると、モーターが停止します。</p>
+</li>
+<li>
+<p>列車が信号まで来ると、停止信号を読み取って停車します。</p>
+</li>
+<li>
+<p>手動スイッチを押すと、モーターが回転して、信号機が進行信号（線路側が緑）を現示します。</p>
+</li>
+<li>
+<p>列車通過監視部（線路脇に設置した超音波センサー）が走行した列車を認識すると、信号機が停止信号に変わります。</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>下記のサムネイルをクリックすると、列車と信号機が動作している様子を再生します。</p>
+</div>
+<div class="videoblock">
+<div class="title">列車と信号機が動作している様子</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/k168I_5-GNs?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_システムの設計"><a class="anchor" href="#_システムの設計"></a>システムの設計</h3>
+<div class="paragraph">
+<p>システムの設計モデルは、<a href="https://www.change-vision.com/">Change Vision社</a> の「 <a href="https://astah.change-vision.com/ja/product/astah-professional.html">Astah* Professional</a> 」で作成しました。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">注記</div>
+</td>
+<td class="content">
+ごめんなさい。日本語のモデル図しかありません。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>models</code> ディレクトリに Astah* で作成したUMLモデルファイル <code>train_control_system.asta</code> があります。</p>
+</div>
+<div class="paragraph">
+<p>このシステムのモデルは、次のような構造になっています。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/system_model_structure.png" alt="system model structure" width="75%">
+</div>
+<div class="title">図 6. システム全体のモデルの構造</div>
+</div>
+<div class="paragraph">
+<p>下記はそのモデルファイルからの抜粋です。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/Train/Train_Subsystem.png" alt="Train Subsystem" width="100%">
+</div>
+<div class="title">図 7. Trainサブシステムのクラス図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/Train/Train/run/stm_Train__run.png" alt="stm Train  run" width="100%">
+</div>
+<div class="title">図 8. Trainクラスのrunメソッドのステートマシン図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/BlockSignal_Subsystem.png" alt="BlockSignal Subsystem" width="100%">
+</div>
+<div class="title">図 9. BlockSignalサブシステムのクラス図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png" alt="stm BlockSignal  run" width="100%">
+</div>
+<div class="title">図 10. BlockSignalクラスのrunメソッドのステートマシン図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png" alt="stm Rotator  run" width="100%">
+</div>
+<div class="title">図 11. Rotatorクラスのrunメソッドのステートマシン図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png" alt="stm SignalDisplay  run" width="100%">
+</div>
+<div class="title">図 12. SignalDisplayクラスのrunメソッドのステートマシン図</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_信号機前で徐行する列車の運転"><a class="anchor" href="#_信号機前で徐行する列車の運転"></a>信号機前で徐行する列車の運転</h3>
+<div class="paragraph">
+<p><code>ev3_train</code> ディレクトリで、 <code>train_slow_stop</code> のプログラムをビルドします。
+この列車は、信号機の前にある警告表示を認識したら徐行します。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ cd ev3_train
+$ pwd
+{インストール場所}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train_slow_stop
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>この <code>app</code> ファイルを、列車のEV3に転送します。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">注記</div>
+</td>
+<td class="content">
+前のプログラムと併存するには、転送するときに別の名前にしておきます。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>転送できたら、走らせてみましょう。</p>
+</div>
+<div class="paragraph">
+<p>下記のサムネイルをクリックすると、列車が信号の手前で徐行している様子を再生します。</p>
+</div>
+<div class="videoblock">
+<div class="title">列車が信号の手前で徐行している様子</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/71gXzo7RDiw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>列車のステートマシン図には「減速走行中」の状態を追加しました。</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png" alt="TrainSlowStop Subsystem" width="100%">
+</div>
+<div class="title">図 13. TrainSlowStopサブシステムのクラス図</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png" alt="stm TrainSlowStop  run" width="100%">
+</div>
+<div class="title">図 14. TrainSlowStopクラスのrunメソッドのステートマシン図</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+最終更新 2025-10-13 02:20:54 +0900
+</div>
+</div>
+</body>
+</html>

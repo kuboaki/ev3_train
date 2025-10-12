@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.23">
+<title>Building a LEGO Train and Signal Using EV3</title>
+<link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph">
+<p><a href="README.adoc">English</a>&nbsp;|&nbsp;<a href="README_ja.adoc">Japanese</a></p>
+</div>
+<div class="sect1">
+<h2 id="_building_a_lego_train_and_signal_using_ev3"><a class="anchor" href="#_building_a_lego_train_and_signal_using_ev3"></a>Building a LEGO Train and Signal Using EV3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This repository provides build instructions for LEGO brick train that run on LEGO City Train tracks, as well as system design diagrams and programs using EV3 to control signals and manage train operation.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+GitHub repository: <a href="https://github.com/kuboaki/ev3_train/" class="bare">https://github.com/kuboaki/ev3_train/</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_motivation"><a class="anchor" href="#_motivation"></a>Motivation</h3>
+<div class="paragraph">
+<p>Before the widespread use of light-based signals in train control, signboards indicating departure or stop were moved to act as signals.</p>
+</div>
+<div class="paragraph">
+<p>For example, in the opening of the following video, a signal using such a signboard is introduced:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The Signal Engineers - 1962 - Electrical Engineering on the Railway</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Click the thumbnail below to play the part that introduces old signals.</p>
+</div>
+<div class="videoblock">
+<div class="title">The Signal Engineers - 1962 - Electrical Engineering on the Railway</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/jTkf5dL1AwU?rel=0&amp;start=81" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>It would be interesting to control a moving train with signals right at your fingertips, wouldn’t it?
+So, I decided to build a signal system imitating these old-style signals seen in the video.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_system_overview"><a class="anchor" href="#_system_overview"></a>System Overview</h3>
+<div class="paragraph">
+<p>This system consists of two main actors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Train (actually, just the locomotive…)</p>
+</li>
+<li>
+<p>Block Signal (signal display section and train detection section)</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_control_system_w_yellow_signal_w_cables_2.png" alt="train control system w yellow signal w cables 2" width="75%">
+</div>
+<div class="title">Figure 1. System Overview</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_system_in_action"><a class="anchor" href="#_system_in_action"></a>System in Action</h3>
+<div class="paragraph">
+<p>The system&#8217;s operation is demonstrated in videos uploaded to YouTube.</p>
+</div>
+<div class="sect3">
+<h4 id="_forwarding_and_stop"><a class="anchor" href="#_forwarding_and_stop"></a>Forwarding and Stop</h4>
+<div class="paragraph">
+<p>The train is forwarding, and will stop at the <strong>Stop Aspect</strong> (Red signal). (This scene does not include a reducing Slowdown.)</p>
+</div>
+<div class="videoblock">
+<div class="title">Forwarding and Stop</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/k168I_5-GNs?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_slowdown_and_stop"><a class="anchor" href="#_slowdown_and_stop"></a>Slowdown and Stop</h4>
+<div class="paragraph">
+<p>When the train pass a <strong>Reduce Aspect</strong> (yellow light), slow down and then stop.
+<strong>This will be implemented in a later section.</strong></p>
+</div>
+<div class="videoblock">
+<div class="title">Slowdown under Reduce Aspect</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/71gXzo7RDiw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_train_well_just_a_locomotive"><a class="anchor" href="#_train_well_just_a_locomotive"></a>Train (well, just a locomotive…)</h3>
+<div class="paragraph">
+<p>The train was built using LEGO Mindstorms EV3 kits and LEGO City Train parts.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_01_w_cables_w_memo.png" alt="train 01 w cables w memo" width="75%">
+</div>
+<div class="title">Figure 2. Locomotive made from EV3 and City Train parts</div>
+</div>
+<div class="sect3">
+<h4 id="_drive_unit"><a class="anchor" href="#_drive_unit"></a>Drive Unit</h4>
+<div class="paragraph">
+<p>The drive unit enables the train to run along the tracks.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices Used</div>
+<ul>
+<li>
+<p>M-Motor (Medium Motor): for driving the wheels</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It’s not straightforward to use the motor for City Train with EV3.
+Moreover, the development environment used in this project (EV3RT) does not support City Train motors.
+For these reasons, I use the M-Motor from the EV3 kit.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_signal_reader"><a class="anchor" href="#_signal_reader"></a>Signal Reader</h4>
+<div class="paragraph">
+<p>Since there’s no driver on this train, a color sensor-based signal reader reads the signals in place of a human operator.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices Used</div>
+<ul>
+<li>
+<p>Color Sensor: for reading signals</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operation_button"><a class="anchor" href="#_operation_button"></a>Operation Button</h4>
+<div class="paragraph">
+<p>The train receives instructions to start and stop via an operation button, which uses a touch sensor.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices Used</div>
+<ul>
+<li>
+<p>Touch Sensor: for receiving start/stop instructions for the train</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_signal_block_signal"><a class="anchor" href="#_signal_block_signal"></a>Signal (Block Signal)</h3>
+<div class="paragraph">
+<p>The signal was built by combining LEGO Mindstorms EV3 and other LEGO Technic parts.</p>
+</div>
+<div class="paragraph">
+<p>This signal imitates what is known as a block signal.</p>
+</div>
+<div class="paragraph">
+<p>For safety reasons, once a train passes through a section beyond this signal, the signal indication switches to "Stop" until the train clears that section.
+This operational control method, where only one train runs within a section separated by signals, is called "block control."
+The section between one signal and the next is called a "block section."</p>
+</div>
+<div class="paragraph">
+<p>This signal consists of a signal display unit, a manual switch, and a train detection unit.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/block_signal_05_w_cables.png" alt="block signal 05 w cables" width="75%">
+</div>
+<div class="title">Figure 3. Block Signal made from EV3 and LEGO Technic parts</div>
+</div>
+<div class="sect3">
+<h4 id="_signal_display_unit"><a class="anchor" href="#_signal_display_unit"></a>Signal Display Unit</h4>
+<div class="paragraph">
+<p>The signal display unit provides a mechanism for switching signal displays by rotating the pallet.
+The signal switching mechanism uses one L-Motor, one Touch Sensor, and one Color Sensor.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices Used</div>
+<ul>
+<li>
+<p>L-Motor(Large Motor): For rotating the palette for signal display</p>
+</li>
+<li>
+<p>Touch Sensor: For monitoring the rotation of the signal display motor</p>
+</li>
+<li>
+<p>Color Sensor: Reader of the currently displayed signal</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+NOTE: Stickers are attached to the blocks for reading the currently displayed signal. The colors are similar to the blue and yellow of LEGO blocks.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_manual_switch"><a class="anchor" href="#_manual_switch"></a>Manual Switch</h4>
+<div class="paragraph">
+<p>Manual switches are used to manually switch signals.
+A touch sensor is used for manual switches.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices used</div>
+<ul>
+<li>
+<p>Touch Sensor: Switch signals manually</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can also switch signals programmatically. This method is used when switching signals when a train passes.</p>
+</div>
+<div class="paragraph">
+<p>The EV3 can use Bluetooth communication, so wireless instructions can also be used to switch signals, but the demos in this repository do not provide a demo using this function.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_train_detector"><a class="anchor" href="#_train_detector"></a>Train Detector</h4>
+<div class="paragraph">
+<p>The train detector monitors the passing of trains.
+The train detector uses an ultrasonic sensor.</p>
+</div>
+<div class="ulist">
+<div class="title">Devices used</div>
+<ul>
+<li>
+<p>Ultrasonic Sensor: Monitors the passing of trains</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_detector_02.png" alt="train detector 02" width="50%">
+</div>
+<div class="title">Figure 4. Train detector made with ultrasonic sensors and LEGO Technic parts</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_instruction"><a class="anchor" href="#_build_instruction"></a>Build Instruction</h3>
+<div class="paragraph">
+<p>In the <code>images</code> directory of this repository, there are <code>.io</code> files of trains and signals created with Bricklink Studio.</p>
+</div>
+<div class="paragraph">
+<p>By referring to these, you can see what parts are needed for assembly and how to assemble them.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Bricklink Studio download page</dt>
+<dd>
+<p><a href="https://www.bricklink.com/v3/studio/download.page" class="bare">https://www.bricklink.com/v3/studio/download.page</a></p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_development_environment"><a class="anchor" href="#_development_environment"></a>Development environment</h3>
+<div class="paragraph">
+<p>I use TOPPERS/EV3RT (Real-Time platform for EV3) for development.</p>
+</div>
+<div class="paragraph">
+<p>The version of EV3RT I use is "1.1-release".</p>
+</div>
+<div class="paragraph">
+<p>To run it in an older environment, you need to adjust the existing code (it&#8217;s better to update to 1.1).</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">EV3RT on TOPPERS</dt>
+<dd>
+<p><a href="https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT" class="bare">https://dev.toppers.jp/trac_user/ev3pf/wiki/WhatsEV3RT</a></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The programming language I use for development is C.</p>
+</div>
+<div class="paragraph">
+<p>Of course, you can use other programming languages ​​that support EV3.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_content_structure"><a class="anchor" href="#_content_structure"></a>Content structure</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-conole" data-lang="conole">├─ images: LEGO Studio, Blender, png, etc.
+├─ models: System Design Model(UML)
+├─ block_signal: codes for block signal
+├─ train_slow_stop: codes for train slow down stop
+└─ train: codes for train</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_the_program"><a class="anchor" href="#_build_the_program"></a>Build the program</h3>
+<div class="sect3">
+<h4 id="_deploy_the_repository_to_the_ev3rt_workspace"><a class="anchor" href="#_deploy_the_repository_to_the_ev3rt_workspace"></a>Deploy the repository to the EV3RT workspace</h4>
+<div class="paragraph">
+<p>In the directory where EV3RT is installed, there is a workspace for building <code>workspace</code>.
+Clone <code>ev3_train</code> next to it.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ cd {E3RT installation location}/ev3rt-1.1-release/hrp3/sdk
+$ git clone https://github.com/kuboaki/ev3_train.git
+$ ls -1
+workspace
+ev3_train</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_build_the_train_program"><a class="anchor" href="#_build_the_train_program"></a>Build the Train program</h4>
+<div class="paragraph">
+<p>Go to the <code>ev3_train</code> directory and build the train program.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ cd ev3_train
+$ pwd
+{installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train
+$ ls -l app
+-rw-r--r-- 1 kuboaki staff 102204 8 9 17:48 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Transfer this <code>app</code> file to the Trains' EV3.
+See the EV3RT website for instructions on how to transfer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_build_the_block_signal_program"><a class="anchor" href="#_build_the_block_signal_program"></a>Build the Block Signal program</h4>
+<div class="paragraph">
+<p>In the same way, build the block signal program in the <code>ev3_train</code> directory.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ pwd
+{EV3RT installation location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=block_signal
+$ ls -l app
+-rw-r--r-- 1 kuboaki staff 104932 8 9 17:49 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Transfer the built <code>app</code> file to the block signal&#8217;s EV3.
+For instructions on how to transfer, see the EV3RT website.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_running_the_system"><a class="anchor" href="#_running_the_system"></a>Running the System</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/train_control_system_w_yellow_signal_w_memo.png" alt="train control system w yellow signal w memo" width="75%">
+</div>
+<div class="title">Figure 5. EV3 Train System in action</div>
+</div>
+<div class="sect3">
+<h4 id="_running_a_train"><a class="anchor" href="#_running_a_train"></a>Running a Train</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start the transferred program. For instructions on how to start the program, see the EV3RT website.</p>
+</li>
+<li>
+<p>When started, a warning sound will sound and the train will wait for instructions to run.</p>
+</li>
+<li>
+<p>Place the train on the tracks and place the wheels on the rails.</p>
+</li>
+<li>
+<p>When you press the operation button, a confirmation sound will sound and the train will run.</p>
+</li>
+<li>
+<p>When the signal reading unit (the color sensor facing upwards) reads a stop signal (red), an arrival sound will sound and the train will stop.</p>
+</li>
+<li>
+<p>When the signal reading unit reads a proceed signal (green), a confirmation sound will sound and the train will resume running.</p>
+</li>
+<li>
+<p>When you press the operation button, the train will stop in the operation completion state.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_controlling_the_block_signal"><a class="anchor" href="#_controlling_the_block_signal"></a>Controlling the Block Signal</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start the transferred program. For instructions on how to start the program, see the EV3RT website.</p>
+</li>
+<li>
+<p>When the program is started, a confirmation sound will sound and the motor will rotate and begin preparation.</p>
+</li>
+<li>
+<p>When a stop signal (red facing down) is indicated, the motor will stop.</p>
+</li>
+<li>
+<p>When the train approaches the signal, it will read the stop signal and stop.</p>
+</li>
+<li>
+<p>When the manual switch is pressed, the motor will rotate and the Block Signal will indicate a proceed signal (green on the track side).</p>
+</li>
+<li>
+<p>When the train passage monitor (ultrasonic sensor installed beside the track) detects a passing train, the block signal will change to a stop signal.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Click the thumbnail below to play the train and the block signal.</p>
+</div>
+<div class="videoblock">
+<div class="title">train and block signal</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/k168I_5-GNs?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_system_design"><a class="anchor" href="#_system_design"></a>System Design</h3>
+<div class="paragraph">
+<p>The system design model was created using <a href="https://astah.change-vision.com/ja/product/astah-professional.html">Astah* Professional</a> by <a href="https://www.change-vision.com/">Change Vision Inc</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Sorry. The model diagrams are only available in Japanese.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The UML model file <code>train_control_system.asta</code> created with Astah* is in the <code>models</code> directory.</p>
+</div>
+<div class="paragraph">
+<p>The following is a structure of the System.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/system_model_structure.png" alt="system model structure" width="75%">
+</div>
+<div class="title">Figure 6. Model structure of the System</div>
+</div>
+<div class="paragraph">
+<p>The following is an excerpt from the model file.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/Train/Train_Subsystem.png" alt="Train Subsystem" width="100%">
+</div>
+<div class="title">Figure 7. Class diagram of the Train subsystem</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/Train/Train/run/stm_Train__run.png" alt="stm Train  run" width="100%">
+</div>
+<div class="title">Figure 8. State machine diagram of the run method of the Train class</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/BlockSignal_Subsystem.png" alt="BlockSignal Subsystem" width="100%">
+</div>
+<div class="title">Figure 9. Class diagram of the BlockSignal subsystem</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/BlockSignal/run/stm_BlockSignal__run.png" alt="stm BlockSignal  run" width="100%">
+</div>
+<div class="title">Figure 10. State machine diagram of the run method of the BlockSignal class</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/Rotator/run/stm_Rotator__run.png" alt="{fullf-width}">
+</div>
+<div class="title">Figure 11. State machine diagram of the run method of the Rotator class</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/BlockSignal/SignalDisplay/run/stm_SignalDisplay__run.png" alt="stm SignalDisplay  run" width="100%">
+</div>
+<div class="title">Figure 12. State machine diagram of the run method of the SignalDisplay class</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_train_slows_down_at_the_yellow_signal"><a class="anchor" href="#_train_slows_down_at_the_yellow_signal"></a>Train slows down at the Yellow Signal</h3>
+<div class="paragraph">
+<p>In the <code>ev3_train</code> directory, build the <code>train_slow_stop</code> program.
+This train will slow down when it recognizes the warning sign in front of the signal.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">$ pwd
+{EV3RT installed location}/ev3rt-1.1-release/hrp3/sdk/ev3_train
+$ make app=train_slow_stop
+$ ls -l app
+-rw-r--r--  1 kuboaki  staff  102552  8  9 18:35 app</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Transfer this <code>app</code> file to the Trains' EV3.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+To allow it to coexist with the previous program, give it a different name when transferring.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once the transfer is complete, let&#8217;s try running the train.</p>
+</div>
+<div class="paragraph">
+<p>Click on the thumbnail below to play the video of the train slowing down in front of the signal.</p>
+</div>
+<div class="videoblock">
+<div class="title">Train slows down at the yellow signal</div>
+<div class="content">
+<iframe width="640" height="360" src="https://www.youtube.com/embed/71gXzo7RDiw?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+<div class="paragraph">
+<p>I added a "slow down" state to the train&#8217;s state machine diagram.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/TrainSlowStop/TrainSlowStop_Subsystem.png" alt="TrainSlowStop Subsystem">
+</div>
+<div class="title">Figure 13. Class diagram of the TrainSlowStop subsystem</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="models/images/train_control_system/TrainSlowStop/Train/run/stm_TrainSlowStop__run.png" alt="stm TrainSlowStop  run">
+</div>
+<div class="title">Figure 14. State machine diagram of the run method of the TrainSlowStop class</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last Updated 2025-10-13 02:21:12 +0900
+</div>
+</div>
+</body>
+</html>
